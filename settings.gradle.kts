@@ -21,3 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "OpenEye"
 include(":app")
+
+include(":module_home")
+include(":module_community")
+include(":module_found")
