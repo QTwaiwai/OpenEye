@@ -43,14 +43,14 @@ android {
 
 kapt {
     arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
+        arg("AROUTER_MODULE_NAME", project.name)
     }
 }
 
 dependencies {
     implementation(libs.transportation.consumer)
-    kapt(libs.arouter.compiler)
-    implementation(libs.arouter.api)
+    implementation ("com.alibaba:arouter-api:1.5.2")
+    kapt  ("com.alibaba:arouter-compiler:1.5.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

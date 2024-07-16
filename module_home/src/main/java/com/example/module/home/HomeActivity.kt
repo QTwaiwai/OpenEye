@@ -3,10 +3,11 @@ package com.example.module.home
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import com.alibaba.android.arouter.facade.annotation.Route
-import com.alibaba.android.arouter.launcher.ARouter
 import com.example.module.home.databinding.ActivityHomeBinding
 import com.example.module.home.ui.HomeFragment
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
+
 /**
  * @author: QT
  * @date: 2024/7/16
