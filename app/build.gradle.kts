@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -34,9 +35,21 @@ android {
         jvmTarget = "1.8"
     }
 }
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+    }
+}
+
 
 dependencies {
-
+    implementation(libs.transportation.consumer)
+    implementation ("com.alibaba:arouter-api:1.5.2")
+    kapt  ("com.alibaba:arouter-compiler:1.5.2")
+    implementation(project(":module_community"))
+    implementation(project(":module_home"))
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
