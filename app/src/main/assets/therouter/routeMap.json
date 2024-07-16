@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/home/HomeActivity/",
+    "className": "com.example.module.home.HomeActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "/home/HomeActivity",
+    "className": "com.example.module.home.HomeActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  }
+]

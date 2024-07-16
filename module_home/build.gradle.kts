@@ -1,6 +1,8 @@
 plugins {
-    alias(libs.plugins.android.application)
+//    alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.android.library")
+    id("kotlin-kapt")
 }
 
 android {
@@ -8,13 +10,17 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.module.home"
+//        applicationId = "com.example.module.home"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+//        versionCode = 1
+//        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    viewBinding{
+        enable = true
     }
 
     buildTypes {
@@ -35,8 +41,16 @@ android {
     }
 }
 
-dependencies {
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 
+dependencies {
+    implementation(libs.transportation.consumer)
+    kapt(libs.arouter.compiler)
+    implementation(libs.arouter.api)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
