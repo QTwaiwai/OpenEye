@@ -1,7 +1,5 @@
 package com.example.module.home.service
 
-import com.example.module.home.bean.Content
-import com.example.module.home.bean.Item
 import com.example.module.home.bean.RecommendData
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Call

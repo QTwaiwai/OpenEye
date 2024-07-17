@@ -5,48 +5,47 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.lib_net.RetrofitClient
-import com.example.module.home.bean.RecItem
-import com.example.module.home.bean.RecommendData
-import com.example.module.home.service.RecommendService
+import com.example.module.home.bean.DailyRvData
+import com.example.module.home.bean.DrItem
+import com.example.module.home.service.DailyRvService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 /**
- * description : RecommendViewModel
+ * description : DailyViewModel
  * author : QTwawa
- * date : 2024/7/16 17:59
+ * date : 2024/7/17 19:03
  */
-class RecommendViewModel :ViewModel() {
-    private val _recommendData = MutableLiveData<List<RecItem>>()
-    val recommendData: LiveData<List<RecItem>>
-        get() = _recommendData
+class DailyViewModel:ViewModel() {
+    private val _dailyRvData = MutableLiveData<List<DrItem>>()
+    val dailyRvData: LiveData<List<DrItem>>
+        get() = _dailyRvData
     private val _url= MutableLiveData<String>()
     val url: LiveData<String>
         get() = _url
-    private val _nextRecommendData = MutableLiveData<List<RecItem>>()
-    val nextRecommendData: LiveData<List<RecItem>>
-        get() = _nextRecommendData
-    private  val service = RetrofitClient.getService(RecommendService::class.java)
+    private val _nextDailyRvData = MutableLiveData<List<DrItem>>()
+    val nextDailyRvData: LiveData<List<DrItem>>
+        get() = _nextDailyRvData
+    private  val service = RetrofitClient.getService(DailyRvService::class.java)
 
     init {
-        getRecommend()
+        getDailyRvData()
     }
 
-    private fun getRecommend() {
-       service
-           .getRecommend()
-           .subscribeOn(Schedulers.io())
-           .observeOn(AndroidSchedulers.mainThread())
-           .subscribe(object : Observer<RecommendData> {
+    private fun getDailyRvData() {
+        service
+            .getDailyRvData()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<DailyRvData> {
                 override fun onSubscribe(d: Disposable) {
                 }
 
-                override fun onNext(t: RecommendData) {
-                    Log.e("NET", "onNext: ${t.itemList}")
+                override fun onNext(t: DailyRvData) {
                     _url.value= t.nextPageUrl
-                    _recommendData.postValue(t.itemList)
+                    _dailyRvData.postValue(t.itemList)
                 }
 
                 override fun onError(e: Throwable) {
@@ -58,12 +57,12 @@ class RecommendViewModel :ViewModel() {
             })
     }
 
-    fun getNextRecommend(url: String){
+    fun getNextDailyRvData(url: String){
         service
-            .getNextRecommend(url)
+            .getNextDailyRvData(url)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<RecommendData> {
+            .subscribe(object : Observer<DailyRvData> {
                 override fun onSubscribe(d: Disposable) {
                 }
 
@@ -74,11 +73,10 @@ class RecommendViewModel :ViewModel() {
                 override fun onComplete() {
                 }
 
-                override fun onNext(t: RecommendData) {
+                override fun onNext(t: DailyRvData) {
                     _url.value=t.nextPageUrl
-                    _recommendData.value= _recommendData.value?.plus(t.itemList)
+                    _dailyRvData.value= _dailyRvData.value?.plus(t.itemList)
                 }
             })
     }
-
 }

@@ -8,71 +8,46 @@ package com.example.module.home.bean
 data class RecommendData(
     val adExist: Boolean,
     val count: Int,
-    val itemList: List<Item>,//1
+    val itemList: List<RecItem>,//1
     val nextPageUrl: String,
     val total: Int
 )
 
-data class Item(
+data class RecItem(
     val adIndex: Int,
-    val `data`: Data,//2
+    val `data`: RecData,//2
     val id: Int,
     val tag: Any,
     val trackingData: Any,
     val type: String
 )
 
-data class Data(
+data class RecData(
     val adTrack: Any,
-    val content: Content,//3
+    val content: RecContent,//3
     val count: Int,
     val dataType: String,
     val footer: Any,
-    val header: Header,
-    val itemList: List<ItemX>
 )
 
-data class Content(
+data class RecContent(
     val adIndex: Int,
-    val `data`: DataX,
+    val `data`: RecDataX,
     val id: Int,
     val tag: Any,
     val trackingData: Any,
     val type: String
 )
 
-data class Header(
-    val actionUrl: String,
-    val followType: String,
-    val icon: String,
-    val iconType: String,
-    val id: Int,
-    val issuerName: String,
-    val labelList: Any,
-    val showHateVideo: Boolean,
-    val tagId: Int,
-    val tagName: Any,
-    val time: Long,
-    val topShow: Boolean
-)
 
-data class ItemX(
-    val adIndex: Int,
-    val `data`: DataXX,
-    val id: Int,
-    val tag: Any,
-    val trackingData: Any,
-    val type: String
-)
-
-data class DataX(
+data class RecDataX(
     val addWatermark: Boolean,
     val area: String,
     val checkStatus: String,
     val city: String,
     val collected: Boolean,
-    val consumption: Consumption,
-    val cover: Cover,
+    val consumption: RecConsumption,
+    val cover: RecCover,
     val createTime: Long,
     val dataType: String,
     val description: String,
@@ -83,17 +58,17 @@ data class DataX(
     val latitude: Double,
     val library: String,
     val longitude: Double,
-    val owner: Owner,
+    val owner: RecOwner,
     val playUrl: String,
     val playUrlWatermark: String,
     val privateMessageActionUrl: Any,
     val reallyCollected: Boolean,
-    val recentOnceReply: RecentOnceReply,
+    val recentOnceReply: RecRecentOnceReply,
     val releaseTime: Long,
     val resourceType: String,
     val selectedTime: Any,
     val source: String,
-    val tags: List<Tag>,
+    val tags: List<RecTag>,
     val title: String,
     val transId: Any,
     val type: String,
@@ -108,14 +83,14 @@ data class DataX(
     val width: Int
 )
 
-data class Consumption(
+data class RecConsumption(
     val collectionCount: Int,
     val realCollectionCount: Int,
     val replyCount: Int,
     val shareCount: Int
 )
 
-data class Cover(
+data class RecCover(
     val blurred: Any,
     val detail: String,
     val feed: String,
@@ -123,7 +98,7 @@ data class Cover(
     val sharing: Any
 )
 
-data class Owner(
+data class RecOwner(
     val actionUrl: String,
     val area: Any,
     val avatar: String,
@@ -147,7 +122,7 @@ data class Owner(
     val userType: String
 )
 
-data class RecentOnceReply(
+data class RecRecentOnceReply(
     val actionUrl: String,
     val contentType: Any,
     val dataType: String,
@@ -155,7 +130,7 @@ data class RecentOnceReply(
     val nickname: String
 )
 
-data class Tag(
+data class RecTag(
     val actionUrl: String,
     val adTrack: Any,
     val bgPicture: String,
@@ -170,48 +145,4 @@ data class Tag(
     val name: String,
     val newestEndTime: Long,
     val tagRecType: String
-)
-
-data class DataXX(
-    val actionUrl: String,
-    val adTrack: List<Any>,
-    val autoPlay: Boolean,
-    val bgPicture: String,
-    val dataType: String,
-    val description: String,
-    val header: HeaderX,
-    val id: Int,
-    val image: String,
-    val label: Label,
-    val labelList: List<LabelX>,
-    val shade: Boolean,
-    val subTitle: String,
-    val title: String
-)
-
-data class HeaderX(
-    val actionUrl: Any,
-    val cover: Any,
-    val description: Any,
-    val font: Any,
-    val icon: Any,
-    val id: Int,
-    val label: Any,
-    val labelList: Any,
-    val rightText: Any,
-    val subTitle: Any,
-    val subTitleFont: Any,
-    val textAlign: String,
-    val title: Any
-)
-
-data class Label(
-    val card: String,
-    val detail: Any,
-    val text: String
-)
-
-data class LabelX(
-    val actionUrl: Any,
-    val text: String
 )

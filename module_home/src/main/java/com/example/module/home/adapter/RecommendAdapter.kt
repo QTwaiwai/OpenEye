@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.module.home.R
-import com.example.module.home.bean.Content
-import com.example.module.home.bean.Data
-import com.example.module.home.bean.Item
+import com.example.module.home.bean.RecItem
 import com.example.module.home.bean.RecommendData
 
 /**
@@ -22,12 +20,12 @@ import com.example.module.home.bean.RecommendData
  * author : QTwawa
  * date : 2024/7/16 15:40
  */
-class RecommendAdapter(private val context: Fragment): ListAdapter<Item, RecommendAdapter.RecommendViewHolder>(object :DiffUtil.ItemCallback<Item>(){
-    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
+class RecommendAdapter(private val context: Fragment): ListAdapter<RecItem, RecommendAdapter.RecommendViewHolder>(object :DiffUtil.ItemCallback<RecItem>(){
+    override fun areItemsTheSame(oldItem: RecItem, newItem: RecItem): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+    override fun areContentsTheSame(oldItem: RecItem, newItem: RecItem): Boolean {
         return oldItem.id == newItem.id
     }
 }) {
@@ -44,14 +42,14 @@ class RecommendAdapter(private val context: Fragment): ListAdapter<Item, Recomme
     }
 
     inner class RecommendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val ivRecommendCover: ImageView = itemView.findViewById(R.id.iv_recommend_cover)
-        private val tvRecommendTitle: TextView = itemView.findViewById(R.id.tv_recommend_title)
-        private val ivRecommendIcon: ImageView = itemView.findViewById(R.id.iv_recommend_icon)
-        private val tvRecommendAuthor: TextView = itemView.findViewById(R.id.tv_recommend_author)
-        private val ivRecommendType: ImageView = itemView.findViewById(R.id.iv_recommend_type)
-        fun bind(data: Item){
+        private val ivRecommendCover: ImageView = itemView.findViewById(R.id.item_iv_recommend_cover)
+        private val tvRecommendTitle: TextView = itemView.findViewById(R.id.item_tv_recommend_title)
+        private val ivRecommendIcon: ImageView = itemView.findViewById(R.id.item_iv_recommend_icon)
+        private val tvRecommendAuthor: TextView = itemView.findViewById(R.id.item_tv_recommend_author)
+        private val ivRecommendType: ImageView = itemView.findViewById(R.id.item_iv_recommend_type)
+        fun bind(data: RecItem){
             Glide.with(itemView.context).load(data.data.content.data.cover.detail.replace("http","https")).into(ivRecommendCover)
-            Glide.with(itemView.context).load(data.data.content.data.owner.avatar.replace("http","https")).into(ivRecommendIcon)
+            Glide.with(itemView.context).load(data.data.content.data.owner.avatar.replace("http","https")).circleCrop().into(ivRecommendIcon)
             when(data.data.content.type){
                 "video"->{
                         ivRecommendType.setImageResource(R.drawable.ic_play)

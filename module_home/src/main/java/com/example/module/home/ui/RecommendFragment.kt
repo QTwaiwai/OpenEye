@@ -1,6 +1,7 @@
 package com.example.module.home.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,7 +55,6 @@ class RecommendFragment: Fragment() {
         }
         mRecommendViewModel.url.observe(viewLifecycleOwner){
             url=it.replace("http","https")
-
         }
     }
     private fun onScroll(){
@@ -79,7 +79,7 @@ class RecommendFragment: Fragment() {
 
                     // 判断是否到达最后一个元素
                     if (lastVisibleItemPosition + visibleItemCount >= totalItemCount) {
-                        upRecommendData()
+                        updataRecommendData()
                     }
                 }
             }
@@ -96,7 +96,7 @@ class RecommendFragment: Fragment() {
         return maxSize
     }
 
-    fun upRecommendData(){
+    fun updataRecommendData(){
         mRecommendViewModel.getNextRecommend(url)
         mRecommendViewModel.url.observe(viewLifecycleOwner) {
             url=it.replace("http","https")
