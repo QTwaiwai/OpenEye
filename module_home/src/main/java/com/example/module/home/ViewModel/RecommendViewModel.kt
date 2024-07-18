@@ -18,34 +18,34 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * author : QTwawa
  * date : 2024/7/16 17:59
  */
-class RecommendViewModel :ViewModel() {
+class RecommendViewModel : ViewModel() {
     private val _recommendData = MutableLiveData<List<RecItem>>()
     val recommendData: LiveData<List<RecItem>>
         get() = _recommendData
-    private val _url= MutableLiveData<String>()
+    private val _url = MutableLiveData<String>()
     val url: LiveData<String>
         get() = _url
     private val _nextRecommendData = MutableLiveData<List<RecItem>>()
     val nextRecommendData: LiveData<List<RecItem>>
         get() = _nextRecommendData
-    private  val service = RetrofitClient.getService(RecommendService::class.java)
+    private val service = RetrofitClient.getService(RecommendService::class.java)
 
     init {
         getRecommend()
     }
 
     private fun getRecommend() {
-       service
-           .getRecommend()
-           .subscribeOn(Schedulers.io())
-           .observeOn(AndroidSchedulers.mainThread())
-           .subscribe(object : Observer<RecommendData> {
+        service
+            .getRecommend()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<RecommendData> {
                 override fun onSubscribe(d: Disposable) {
                 }
 
                 override fun onNext(t: RecommendData) {
-                    Log.e("NET", "onNext: ${t.itemList}")
-                    _url.value= t.nextPageUrl
+                    Log.d("NET", "onNext: ${t.itemList}")
+                    _url.value = t.nextPageUrl
                     _recommendData.postValue(t.itemList)
                 }
 
@@ -58,7 +58,7 @@ class RecommendViewModel :ViewModel() {
             })
     }
 
-    fun getNextRecommend(url: String){
+    fun getNextRecommend(url: String) {
         service
             .getNextRecommend(url)
             .subscribeOn(Schedulers.io())
@@ -75,8 +75,8 @@ class RecommendViewModel :ViewModel() {
                 }
 
                 override fun onNext(t: RecommendData) {
-                    _url.value=t.nextPageUrl
-                    _recommendData.value= _recommendData.value?.plus(t.itemList)
+                    _url.value = t.nextPageUrl
+                    _recommendData.value = _recommendData.value?.plus(t.itemList)
                 }
             })
     }

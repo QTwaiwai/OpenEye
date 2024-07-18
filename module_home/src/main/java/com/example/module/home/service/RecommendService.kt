@@ -14,6 +14,7 @@ import retrofit2.http.Url
 interface RecommendService {
     @GET("api/v7/community/tab/rec")
     fun getRecommend(): Observable<RecommendData>
+
     @GET
     fun getNextRecommend(@Url url: String): Observable<RecommendData>
 }

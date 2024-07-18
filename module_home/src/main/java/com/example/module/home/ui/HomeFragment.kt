@@ -15,16 +15,18 @@ import com.google.android.material.tabs.TabLayoutMediator
  * description:首页的fragment
  */
 
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
     private val mBinding: FgHomeBinding by lazy {
         FgHomeBinding.inflate(layoutInflater)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return mBinding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
@@ -35,11 +37,11 @@ class HomeFragment: Fragment() {
         val fragments = ArrayList<Fragment>()
         fragments.add(DailyFragment())
         fragments.add(RecommendFragment())
-        mBinding.vp2HomeContent.adapter = HomeAdapter(fragments,childFragmentManager,lifecycle)
-        TabLayoutMediator(mBinding.tabHome,mBinding.vp2HomeContent) {tab,position->
-            tab.text = when(position){
-                0->"日报"
-                1->"推荐"
+        mBinding.vp2HomeContent.adapter = HomeAdapter(fragments, childFragmentManager, lifecycle)
+        TabLayoutMediator(mBinding.tabHome, mBinding.vp2HomeContent) { tab, position ->
+            tab.text = when (position) {
+                0 -> "日报"
+                1 -> "推荐"
                 else -> error("迷路了QAQ")
             }
         }.attach()

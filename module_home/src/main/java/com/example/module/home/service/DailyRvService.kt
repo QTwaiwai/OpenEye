@@ -14,6 +14,7 @@ import retrofit2.http.Url
 interface DailyRvService {
     @GET("api/v5/index/tab/feed")
     fun getDailyRvData(): Observable<DailyRvData>
+
     @GET
     fun getNextDailyRvData(@Url url: String): Observable<DailyRvData>
 }
