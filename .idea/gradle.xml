@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/lib_base" />
             <option value="$PROJECT_DIR$/module_community" />
             <option value="$PROJECT_DIR$/module_found" />
             <option value="$PROJECT_DIR$/module_home" />
