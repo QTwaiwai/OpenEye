@@ -5,13 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    android:orientation="vertical"
+    tools:context=".ui.SpecialAllActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.module.found.ui.fragment.FoundFragment"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="275dp"
-        tools:layout_editor_absoluteY="352dp" />
+        android:layout_height="?attr/actionBarSize"
+        app:title="专题" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_special_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

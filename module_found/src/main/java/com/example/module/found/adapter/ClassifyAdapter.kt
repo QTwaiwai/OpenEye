@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.module.found.R
-import com.example.module.found.bean.Classify
+import com.example.module.found.bean.ClassifyBean
 import com.example.module.found.ui.ClassifyDetailActivity
 
-class ClassifyAdapter(private val classifyList: List<Classify>) :
+class ClassifyAdapter(private val classifyList: List<ClassifyBean>) :
     RecyclerView.Adapter<ClassifyAdapter.ViewHolder>() {
 
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {

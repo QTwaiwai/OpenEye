@@ -1,6 +1,6 @@
-package com.example.module.found.net
+package com.example.module.found.net.apiservice
 
-import com.example.module.found.bean.Classify
+import com.example.module.found.bean.ClassifyBean
 import com.example.module.found.bean.ClassifyDetail
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,7 +12,7 @@ import retrofit2.http.Query
  */
 interface ClassifyService {
     @GET("api/v4/categories")
-    suspend fun getClassify(): List<Classify>
+    suspend fun getClassify(): List<ClassifyBean>
 
     @GET("api/v1/tag/videos")
     suspend fun getClassifyDetail(

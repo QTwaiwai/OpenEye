@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.FoundFragment">
+    tools:context=".ui.fragment.FoundFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="分类"
-                android:textSize="28dp" />
+                android:textSize="25dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_classify"
@@ -61,14 +61,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="专题"
-                android:textSize="28dp"/>
+                android:textSize="25dp"
+                app:drawableEndCompat="@drawable/img_special_next" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_special"
+                android:id="@+id/rv_special_preview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

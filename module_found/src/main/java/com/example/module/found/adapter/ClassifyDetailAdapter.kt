@@ -43,8 +43,6 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
     }
 
     override fun onBindViewHolder(holder: ClassifyDetailAdapter.ViewHolder, position: Int) {
-        //val classifyDetail = classifyList[position]
-        val classifyDetail = classifyDetail
         holder.tvAuthorName.text = classifyDetail.itemList[position].data.header.title
 
         holder.tvVideoDesc.text = classifyDetail.itemList[position].data.content.data.description

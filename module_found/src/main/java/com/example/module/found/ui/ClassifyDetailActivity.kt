@@ -6,12 +6,9 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lib.base.BaseActivity
-import com.example.module.found.adapter.ClassifyAdapter
 import com.example.module.found.adapter.ClassifyDetailAdapter
-import com.example.module.found.bean.Classify
 import com.example.module.found.bean.ClassifyDetail
 import com.example.module.found.databinding.ActivityClassifyDetailBinding
 import com.example.module.found.viewmodel.ClassifyViewModel

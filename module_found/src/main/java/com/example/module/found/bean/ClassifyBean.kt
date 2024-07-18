@@ -5,7 +5,7 @@ package com.example.module.found.bean
  * email : 1301731619@qq.com
  * date : 2024/7/16 19:27
  */
-data class Classify(
+data class ClassifyBean(
     val alias: Any,
     val bgColor: String,
     val bgPicture: String,
