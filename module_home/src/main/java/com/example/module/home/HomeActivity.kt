@@ -15,15 +15,16 @@ import com.alibaba.android.arouter.launcher.ARouter
  */
 
 @Route(path = "/home/HomeActivity")
-class HomeActivity:AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     private val mBinding: ActivityHomeBinding by lazy {
         ActivityHomeBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = resources.getColor(R.color.black,null)
+        window.statusBarColor = resources.getColor(R.color.black, null)
         ARouter.getInstance().inject(this)
         initView()
     }
@@ -34,14 +35,14 @@ class HomeActivity:AppCompatActivity() {
             .replace(R.id.fg_home_view, homeFragment)
             .commit()
         mBinding.btnHomeNavigation.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.item_home->{
+            when (it.itemId) {
+                R.id.item_home -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fg_home_view, homeFragment)
                         .commit()
                 }
             }
             true
-            }
         }
     }
+}
