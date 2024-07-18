@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun splash() {
         Thread{
-            Thread.sleep(2000)
+            Thread.sleep(3000)
             ARouter.getInstance().build("/home/HomeActivity").navigation()
             finish()
         }.start()
