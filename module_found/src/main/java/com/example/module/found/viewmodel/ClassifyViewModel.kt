@@ -37,7 +37,7 @@ class ClassifyViewModel : ViewModel() {
     fun getClassifyDetailData(id: String) {
         viewModelScope.launch(Dispatchers.IO){
             try {
-                val response = classifyService.getClassifyDetail(id)
+                val response = classifyService.getClassifyDetail(id,"","","")
                 Log.d("response", "成功获取数据$response")
                 _mutableDetailStateFlow.emit(response)
 

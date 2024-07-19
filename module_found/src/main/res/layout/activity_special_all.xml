@@ -8,11 +8,6 @@
     android:orientation="vertical"
     tools:context=".ui.SpecialAllActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:title="专题" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_special_all"
         android:layout_width="match_parent"

@@ -16,6 +16,9 @@ interface ClassifyService {
 
     @GET("api/v1/tag/videos")
     suspend fun getClassifyDetail(
-        @Query("id") id: String
+        @Query("id") id: String,
+        @Query("start") start: String,
+        @Query("num") num: String,
+        @Query("strategy") strategy: String
     ): ClassifyDetail
 }

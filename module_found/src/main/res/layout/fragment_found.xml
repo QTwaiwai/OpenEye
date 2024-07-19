@@ -48,9 +48,9 @@
                 android:id="@+id/tv_classify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:padding="8dp"
                 android:text="分类"
-                android:textSize="25dp" />
+                android:textSize="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_classify"
@@ -59,11 +59,12 @@
                 android:background="@drawable/shape_classify_back" />
 
             <TextView
+                android:id="@+id/tv_goto_special_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:padding="8dp"
                 android:text="专题"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 app:drawableEndCompat="@drawable/img_special_next" />
 
             <androidx.recyclerview.widget.RecyclerView

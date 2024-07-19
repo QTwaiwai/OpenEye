@@ -1,23 +1,28 @@
 package com.example.module.found.ui.fragment
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.module.found.adapter.ClassifyAdapter
+import com.example.module.found.adapter.SpecialPreviewAdapter
 import com.example.module.found.bean.ClassifyBean
 import com.example.module.found.bean.SpecialDetailBean
 import com.example.module.found.databinding.FragmentFoundBinding
+import com.example.module.found.ui.SpecialAllActivity
 import com.example.module.found.viewmodel.ClassifyViewModel
 import com.example.module.found.viewmodel.SpecialViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-
 
 class FoundFragment : Fragment() {
     private var mbinding: FragmentFoundBinding? = null
@@ -26,7 +31,9 @@ class FoundFragment : Fragment() {
     private lateinit var vmSpecial: SpecialViewModel
 
     private lateinit var classifyList: List<ClassifyBean>
-    private lateinit var special: SpecialDetailBean
+    private lateinit var specialList: List<SpecialDetailBean>
+
+    //private var deliver: DeliverData? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 初始化 ViewModel
@@ -46,21 +53,35 @@ class FoundFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getData()
-    }
+        val specialManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mbinding!!.rvSpecialPreview.layoutManager = specialManager
 
+        getData()
+
+        mbinding?.tvGotoSpecialAll?.setOnClickListener {
+            //val args= bundleOf("specialList" to specialList)
+            Log.d("specialList", "onViewCreated: $specialList")
+            if (specialList.isNotEmpty()) {
+                //val intent = Intent(requireActivity(), SpecialAllActivity::class.java)
+                //intent.putExtra("specialList", specialList.toString())
+                startActivity(Intent(requireActivity(), SpecialAllActivity::class.java))
+            }
+            //startActivity(Intent(requireActivity(), SpecialAllActivity::class.java))
+        }
+
+    }
     private fun getData() {
-        //请求专题数据
+
         lifecycleScope.launch {
-            vmSpecial.getSpecialData()
-            vmSpecial.specialStateFlow.collectLatest {
-                it?.let {
-                    special = it
-                    Log.d("specialList", "getData: $it")
-                    //专题
-                    /*val specialManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                    mbinding!!.rvSpecialPreview.layoutManager = specialManager
-                    mbinding!!.rvSpecialPreview.adapter = SpecialPreviewAdapter(special)*/
+
+            vmSpecial.getSpecialAllData()
+
+            vmSpecial.specialAllStateFlow.collectLatest {
+                if (it != null) {
+                    specialList = it
+                    mbinding!!.rvSpecialPreview.adapter = SpecialPreviewAdapter(it)
+                   // deliver?.deliverSpecialData(specialList)
                 }
             }
         }
@@ -80,12 +101,8 @@ class FoundFragment : Fragment() {
                 }
             }
         }
-
     }
-
-    private fun initRv() {
-
-
-
+    interface DeliverData {
+        fun deliverSpecialData(specialList: List<SpecialDetailBean>)
     }
 }

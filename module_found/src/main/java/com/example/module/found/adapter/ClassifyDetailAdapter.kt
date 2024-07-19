@@ -7,8 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.lib.base.timeConversion
 import com.example.module.found.bean.ClassifyDetail
 import com.example.module.found.databinding.ItemClassifyDetailBinding
+import com.example.module.found.ui.SpecialDetailActivity
 
 /**
  * author : zeq
@@ -30,6 +32,14 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
         val tvClassify: TextView = binding.tvClassifyItem
         val tvAgree: TextView = binding.tvAgree
         val imgShare: ImageView = binding.imgDetailShare
+
+        init {
+            initListener()
+        }
+
+        private fun initListener() {
+
+        }
     }
 
     override fun onCreateViewHolder(
@@ -47,7 +57,7 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
 
         holder.tvVideoDesc.text = classifyDetail.itemList[position].data.content.data.description
         holder.tvVideoTime.text =
-            classifyDetail.itemList[position].data.content.data.duration.toString()
+            classifyDetail.itemList[position].data.content.data.duration.timeConversion()
         holder.tvClassify.text =
             buildString {
                 append("#")

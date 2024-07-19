@@ -1,7 +1,9 @@
 package com.example.module.found.net.apiservice
 
+import com.example.module.found.bean.SpecialBean
 import com.example.module.found.bean.SpecialDetailBean
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * author : zeq
@@ -9,6 +11,9 @@ import retrofit2.http.GET
  * date : 2024/7/18 16:30
  */
 interface SpecialService {
+    @GET("api/v3/specialTopics")
+    suspend fun getSpecial(): SpecialBean
+
     @GET("api/v3/lightTopics/internal/{id}")
-    suspend fun getSpecial(): SpecialDetailBean
+    suspend fun getSpecialDetail(@Path("id") id: String): SpecialDetailBean
 }

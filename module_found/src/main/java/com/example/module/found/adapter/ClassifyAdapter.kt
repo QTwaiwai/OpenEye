@@ -24,7 +24,7 @@ class ClassifyAdapter(private val classifyList: List<ClassifyBean>) :
         val holder = ViewHolder(view)
 
         holder.itemView.setOnClickListener {
-            val item = classifyList[holder.adapterPosition]
+            val item = classifyList[holder.absoluteAdapterPosition]
 
             ClassifyDetailActivity.startDetail(
                 parent.context,
