@@ -19,6 +19,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import retrofit2.await
 
@@ -34,8 +37,8 @@ class DailyViewModel : ViewModel() {
     private val _url = MutableLiveData<String>()
     val url: LiveData<String>
         get() = _url
-    private val _dailyVp2Data = MutableStateFlow<List<DvItem>?>(null)
-    val dailyVpData: StateFlow<List<DvItem>?>
+    private val _dailyVp2Data = MutableLiveData<List<DvItem>>()
+    val dailyVpData: MutableLiveData<List<DvItem>>
         get() = _dailyVp2Data
     private val serviceRv = RetrofitClient.getService(DailyRvService::class.java)
     private val serviceVp2 = RetrofitClient.getService(DailyVp2Service::class.java)
@@ -46,14 +49,24 @@ class DailyViewModel : ViewModel() {
     }
 
     private fun getDailyVpData() {
-        viewModelScope.launch(Dispatchers.IO) {
-           try {
-               val response = serviceVp2.getDailyVp2Data()
-               _dailyVp2Data.emit(response.itemList)
-           }catch (e:Exception){
-               e.printStackTrace()
-           }
-        }
+        serviceVp2
+            .getDailyVp2Data()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<DailyVp2Data> {
+                override fun onSubscribe(d: Disposable) {
+                }
+
+                override fun onError(e: Throwable) {
+                }
+
+                override fun onComplete() {
+                }
+
+                override fun onNext(t: DailyVp2Data) {
+                    _dailyVp2Data.postValue(t.itemList)
+                }
+            })
     }
 
     private fun getDailyRvData() {

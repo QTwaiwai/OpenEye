@@ -19,7 +19,7 @@ import com.example.module.home.bean.DvItem
  * author : QTwawa
  * date : 2024/7/17 16:08
  */
-class DailyBannerAdapter(private val context: Fragment) :
+class DailyBannerAdapter :
     ListAdapter<DvItem, DailyBannerAdapter.DailyBannerViewHolder>(object :
         DiffUtil.ItemCallback<DvItem>() {
         override fun areItemsTheSame(oldItem: DvItem, newItem: DvItem): Boolean {
@@ -31,6 +31,10 @@ class DailyBannerAdapter(private val context: Fragment) :
         }
 
     }) {
+    private var isScrolling = false
+    fun addPageChange(isl: Boolean) {
+        isScrolling = isl
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyBannerViewHolder {

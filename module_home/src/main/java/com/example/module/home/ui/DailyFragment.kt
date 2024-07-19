@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -14,8 +13,7 @@ import com.example.module.home.ViewModel.DailyViewModel
 import com.example.module.home.adapter.DailyBannerAdapter
 import com.example.module.home.adapter.DailyRvAdapter
 import com.example.module.home.databinding.FgHomeDailyBinding
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import com.example.module.home.helper.BannerHelper
 import java.util.Timer
 import java.util.TimerTask
 
@@ -35,8 +33,8 @@ class DailyFragment : Fragment() {
     private val mRvAdapter: DailyRvAdapter by lazy {
         DailyRvAdapter(this)
     }
-    private val mVp2Adapter: DailyBannerAdapter by lazy {
-        DailyBannerAdapter(this)
+    private val bannerHelper by lazy {
+        BannerHelper()
     }
     private var url: String = "" //Rv下一个Url
     private var count: Int = 0
@@ -61,21 +59,13 @@ class DailyFragment : Fragment() {
     }
 
     private fun initBanner() {
-        lifecycleScope.launch {
-            mDailyViewModel.dailyVpData.apply {
-                collectLatest {
-                    it?.let {
-                        mVp2Adapter.submitList(it)
-                    }
-                }
-                mBinding.vp2HomeDaily.apply {
-                    adapter = mVp2Adapter
-                    setCurrentItem(100, true)
-                    offscreenPageLimit = 3
-                }
+        mDailyViewModel.dailyVpData.observe(viewLifecycleOwner) {
+            val list=it
+            mRvAdapter.onInitBanner {
+                it.submitBannerList(list)
+                bannerHelper.initBanner(it)
             }
         }
-        startBanner()
     }
 
     private fun initRvView() {
@@ -115,37 +105,6 @@ class DailyFragment : Fragment() {
                         mDailyViewModel.getNextDailyRvData(url)
                     }
                 }
-            }
-        })
-    }
-
-    private fun startBanner() {
-        timerTask = object : TimerTask() {
-            override fun run() {
-                if (!isDown) {
-                    val page = mBinding.vp2HomeDaily.currentItem + 1
-                    activity?.runOnUiThread {
-                        mBinding.vp2HomeDaily.currentItem = page
-                    }
-                }
-            }
-
-        }
-        if (!isStart) {
-            time.schedule(timerTask, 0, 5000)
-        }
-        mBinding.vp2HomeDaily.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                isDown = true
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-                isDown = false
             }
         })
     }

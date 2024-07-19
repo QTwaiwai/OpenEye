@@ -13,5 +13,5 @@ import retrofit2.http.GET
  */
 interface DailyVp2Service {
     @GET("api/v4/rankList/videos?strategy=weekly")
-    suspend fun getDailyVp2Data(): DailyVp2Data
+     fun getDailyVp2Data(): Observable<DailyVp2Data>
 }
