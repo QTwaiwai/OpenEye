@@ -17,27 +17,26 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#DF0000"
+            android:background="#A96B70"
             app:navigationIcon="@drawable/back"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextColor="@color/white"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.media3.ui.PlayerView
+    <xyz.doikki.videoplayer.player.VideoView
         android:id="@+id/video"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         app:layout_constraintStart_toStartOf="@id/appbar"
-        app:layout_constraintTop_toBottomOf="@id/appbar"
-        app:resize_mode="fill"
-        app:show_buffering="always"/>
+        app:layout_constraintTop_toBottomOf="@id/appbar" />
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/video">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="#F9C8D4">
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
@@ -45,22 +44,38 @@
                 android:text="这是视频标题"
                 android:textColor="@color/white"
                 android:lines="1"
+                android:textSize="20dp"
+                android:padding="5dp"
                 android:ellipsize="end"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:text="作者"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
             <TextView
                 android:id="@+id/tv_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:text="标签"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toEndOf="@+id/tv_author"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="这是视频描述"
+                android:padding="10dp"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/tv_tag"
                 app:layout_constraintStart_toStartOf="parent"/>

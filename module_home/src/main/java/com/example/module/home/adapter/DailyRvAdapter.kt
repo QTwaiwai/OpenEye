@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.example.module.home.R
 import com.example.module.home.bean.DrItem
@@ -34,7 +35,6 @@ class DailyRvAdapter(private val context: Fragment) :
             return oldItem.data == newItem.data
         }
     }) {
-    var isScrolling = false
     lateinit var bannerList: List<DvItem>
     lateinit var mViewPager2: ViewPager2
     private var mInitBanner: ((DailyRvAdapter) -> Unit)? = null
@@ -92,13 +92,14 @@ class DailyRvAdapter(private val context: Fragment) :
         private val tvDailyAuthor: TextView = itemView.findViewById(R.id.item_tv_home_daily_author)
         private val tvDailyTime: TextView = itemView.findViewById(R.id.item_tv_home_daily_time)
         private val tvDailyTag: TextView = itemView.findViewById(R.id.item_tv_home_daily_tag)
+
         @SuppressLint("SetTextI18n")
         fun bind(data: DrItem) {
             Glide.with(itemView.context)
-                .load(data.data.content.data.cover.detail?.replace("http", "https"))
+                .load(data.data.content.data.cover.detail.replace("http", "https"))
                 .into(ivDailyCover)
             Glide.with(itemView.context)
-                .load(data.data.content.data.author.icon?.replace("http", "https")).circleCrop()
+                .load(data.data.content.data.author.icon.replace("http", "https")).circleCrop()
                 .into(ivDailyIcon)
             tvDailyTitle.text = data.data.content.data.title
             tvDailyAuthor.text = data.data.content.data.author.name
@@ -110,8 +111,30 @@ class DailyRvAdapter(private val context: Fragment) :
             time += ":"
             time += if (second < 10) "0$second" else second.toString()
             tvDailyTime.text = time
+            //设计点击事件
+            ivDailyCover.setOnClickListener {
+                ARouter.getInstance().build("/video/VideoActivity")
+                    .withString("title",data.data.content.data.title)
+                    .withString("author",data.data.content.data.author.name)
+                    .withString("description",data.data.content.data.description)
+                    .withInt("likes",data.data.content.data.consumption.collectionCount)
+                    .withString("tag",data.data.content.data.category)
+                    .withInt("share",data.data.content.data.consumption.shareCount)
+                    .withInt("star",data.data.content.data.consumption.realCollectionCount)
+                    .withString("url",data.data.content.data.playUrl.replace("http", "https"))
+                    .withInt("id",data.data.content.data.id)
+                    .navigation(context.activity?.application?.applicationContext)
+            }
         }
     }
-
-
 }
+
+//tvTitle.text=intent.getStringExtra("title")
+//tvDescription.text=intent.getStringExtra("description")
+//tvLikes.text=intent.getStringExtra("likes")
+//tvTag.text="#"+intent.getStringExtra("tag")
+//tvStar.text=intent.getStringExtra("star")
+//tvShare.text=intent.getStringExtra("share")
+//toolbar.title=intent.getStringExtra("title")
+//url=intent.getStringExtra("url")
+//mOthersViewModel.getOthersData(intent.getIntExtra("id",0))

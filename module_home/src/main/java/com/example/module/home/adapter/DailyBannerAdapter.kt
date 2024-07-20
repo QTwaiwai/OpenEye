@@ -1,12 +1,10 @@
 package com.example.module.home.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +13,7 @@ import com.example.module.home.R
 import com.example.module.home.bean.DvItem
 
 /**
- * description : TODO:类的作用
+ * description : banner的adapter
  * author : QTwawa
  * date : 2024/7/17 16:08
  */
@@ -31,10 +29,7 @@ class DailyBannerAdapter :
         }
 
     }) {
-    private var isScrolling = false
-    fun addPageChange(isl: Boolean) {
-        isScrolling = isl
-    }
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyBannerViewHolder {
@@ -66,5 +61,5 @@ inner class DailyBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(item
             .into(ivDailyCover)
         tvDailyTitle.text = data.data.title
     }
-}
+  }
 }

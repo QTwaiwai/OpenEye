@@ -2,12 +2,10 @@ package com.example.module.home.service
 
 import com.example.module.home.bean.DailyVp2Data
 import io.reactivex.rxjava3.core.Observable
-import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.http.GET
 
 /**
- * description : TODO:类的作用
+ * description : 请求的Banner的数据
  * author : QTwawa
  * date : 2024/7/18 10:05
  */

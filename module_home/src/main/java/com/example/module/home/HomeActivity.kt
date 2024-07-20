@@ -1,5 +1,6 @@
 package com.example.module.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,8 @@ import com.example.module.home.databinding.ActivityHomeBinding
 import com.example.module.home.ui.HomeFragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.module.community.CommunityFragment
+import com.example.module.found.ui.FoundFragment
 
 /**
  * @author: QT
@@ -29,16 +32,26 @@ class HomeActivity : AppCompatActivity() {
         initView()
     }
 
+    @SuppressLint("CommitTransaction")
     private fun initView() {
-        val homeFragment = HomeFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fg_home_view, homeFragment)
+            .replace(R.id.fg_home_view, HomeFragment())
             .commit()
         mBinding.btnHomeNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.item_home -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fg_home_view, homeFragment)
+                        .replace(R.id.fg_home_view, HomeFragment())
+                        .commit()
+                }
+                R.id.item_found->{
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fg_home_view, FoundFragment())
+                        .commit()
+                }
+                R.id.item_community->{
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fg_home_view, CommunityFragment())
                         .commit()
                 }
             }

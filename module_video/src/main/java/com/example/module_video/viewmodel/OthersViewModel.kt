@@ -23,8 +23,8 @@ class OthersViewModel:ViewModel() {
         get() = _othersData
     private val othersService= RetrofitClient.getService(OthersService::class.java)
 
-    fun getOthersData(url:String){
-        othersService.getOthersData(url)
+    fun getOthersData(id:Int){
+        othersService.getOthersData(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<OthersData> {

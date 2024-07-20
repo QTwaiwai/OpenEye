@@ -1,21 +1,21 @@
 plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
-    // id("com.android.library")
+    id("com.android.library")
     id("kotlin-kapt")
-    alias(libs.plugins.android.application)
+//    alias(libs.plugins.android.application)
 
 }
 
 android {
     namespace = "com.example.module_video"
     compileSdk = 34
-    val isBuildModule = true
+    val isBuildModule = false
     defaultConfig {
         minSdk = 24
         targetSdk = 34
-        applicationId = "com.example.module_video"
-        versionCode = 1
-        versionName = "1.0"
+//        applicationId = "com.example.module_video"
+//        versionCode = 1
+//        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -58,9 +58,10 @@ kapt {
 dependencies {
     implementation(project(":lib_net"))
     //第三方播放库
-    implementation("androidx.media3:media3-ui:1.3.1")
-    implementation("androidx.media3:media3-session:1.3.1")
-    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    implementation("xyz.doikki.android.dkplayer:dkplayer-java:3.3.6")
+    implementation("xyz.doikki.android.dkplayer:player-exo:3.3.6")
+    implementation("xyz.doikki.android.dkplayer:player-ijk:3.3.6")
+    implementation("xyz.doikki.android.dkplayer:dkplayer-ui:3.3.6")
     //网络请求库
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")

@@ -49,6 +49,9 @@ kapt {
 
 dependencies {
     implementation(project(":lib_net"))
+    implementation(project(":module_video"))
+    implementation(project(":module_found"))
+    implementation(project(":module_community"))
     implementation ("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
     implementation ("androidx.lifecycle:lifecycle-viewmodel:2.6.1")
     implementation ("androidx.lifecycle:lifecycle-livedata:2.6.1")

@@ -1,21 +1,20 @@
 package com.example.module.home.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.example.module.home.ViewModel.DailyViewModel
-import com.example.module.home.adapter.DailyBannerAdapter
 import com.example.module.home.adapter.DailyRvAdapter
 import com.example.module.home.databinding.FgHomeDailyBinding
 import com.example.module.home.helper.BannerHelper
-import java.util.Timer
-import java.util.TimerTask
 
 /**
  * description : RecommendViewModel
@@ -37,16 +36,11 @@ class DailyFragment : Fragment() {
         BannerHelper()
     }
     private var url: String = "" //Rv下一个Url
-    private var count: Int = 0
-    private lateinit var timerTask: TimerTask
-    private var time = Timer()
-    private var isDown = false
-    private var isStart = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return mBinding.root
     }
 
@@ -60,10 +54,10 @@ class DailyFragment : Fragment() {
 
     private fun initBanner() {
         mDailyViewModel.dailyVpData.observe(viewLifecycleOwner) {
-            val list=it
-            mRvAdapter.onInitBanner {
-                it.submitBannerList(list)
-                bannerHelper.initBanner(it)
+            val list = it
+            mRvAdapter.onInitBanner { adapter ->
+                adapter.submitBannerList(list)
+                bannerHelper.initBanner(adapter)
             }
         }
     }
@@ -74,7 +68,6 @@ class DailyFragment : Fragment() {
                 element.type != "textCard"
             }
             mRvAdapter.submitList(list)
-            count += list.size
         }
         mDailyViewModel.url.observe(viewLifecycleOwner) {
             url = it.replace("http", "https")
@@ -85,27 +78,28 @@ class DailyFragment : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun onScroll() {
+        //滑到下面加载更多
         mBinding.rvHomeDaily.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
-                val adapter = recyclerView.adapter
-
-                if (layoutManager != null && adapter != null) {
-                    // 获取最后一个可见item的位置
-                    val lastVisibleItemPosition =
-                        layoutManager.findLastVisibleItemPosition()
-                    // 获取可见item的数量
-                    val visibleItemCount = recyclerView.childCount
-                    // 获取Adapter的item总数
-                    val totalItemCount = adapter.itemCount
-                    // 判断是否到达最后一个元素
-                    if (lastVisibleItemPosition + visibleItemCount >= totalItemCount) {
-                        mDailyViewModel.getNextDailyRvData(url)
-                    }
+                if (!recyclerView.canScrollVertically(1)) {
+                    mDailyViewModel.getNextDailyRvData(url)
                 }
             }
         })
+        //判断是否阻拦横向滑动
+        val recyclerViewTouchListener = View.OnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_MOVE||event.action == MotionEvent.ACTION_DOWN) {
+                val childView = mBinding.rvHomeDaily.findChildViewUnder(event.x, event.y)
+                if (childView != null) {
+                    val position = mBinding.rvHomeDaily.getChildAdapterPosition(childView)
+                    mBinding.rvHomeDaily.isScrollEnabled = position != 0
+                }
+            }
+            false
+        }
+        mBinding.rvHomeDaily.setOnTouchListener(recyclerViewTouchListener)
     }
 }

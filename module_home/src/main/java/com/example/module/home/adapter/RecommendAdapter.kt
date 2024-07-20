@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.module.home.R
 import com.example.module.home.bean.RecItem
-import com.example.module.home.bean.RecommendData
 
 /**
  * description : RecommendAdapter

@@ -1,19 +1,23 @@
 package com.example.module_video.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
-import androidx.media3.exoplayer.ExoPlayer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.module_video.R
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.example.module_video.adapter.OthersAdapter
 import com.example.module_video.databinding.ActivityVideoBinding
 import com.example.module_video.viewmodel.OthersViewModel
+import xyz.doikki.videocontroller.StandardVideoController
+import xyz.doikki.videocontroller.component.CompleteView
+import xyz.doikki.videocontroller.component.ErrorView
+import xyz.doikki.videocontroller.component.GestureView
+import xyz.doikki.videocontroller.component.VodControlView
+import xyz.doikki.videoplayer.player.VideoView
 
+
+@Route(path="/video/VideoActivity")
 class VideoActivity : AppCompatActivity() {
     private val mBinding: ActivityVideoBinding by lazy {
         ActivityVideoBinding.inflate(layoutInflater)
@@ -27,12 +31,22 @@ class VideoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = resources.getColor(R.color.white,null)
+        ARouter.getInstance().inject(this)
         initView()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
+        mBinding.apply {
+            tvTitle.text=intent.getStringExtra("title")
+            tvAuthor.text=intent.getStringExtra("author")
+            tvDescription.text=intent.getStringExtra("description")
+            tvLikes.text=intent.getIntExtra("likes",0).toString()
+            tvTag.text="#"+intent.getStringExtra("tag")
+            tvStar.text=intent.getIntExtra("star",0).toString()
+            tvShare.text=intent.getIntExtra("share",0).toString()
+            toolbar.title=intent.getStringExtra("title")
+        }
         setSupportActionBar(mBinding.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
@@ -41,9 +55,8 @@ class VideoActivity : AppCompatActivity() {
         mBinding.toolbar.setNavigationOnClickListener {
             finish()
         }
-//        mBinding.video.player=ExoPlayer.Builder(this).build()
-//        playVideo()
-        mOthersViewModel.getOthersData("https://baobab.kaiyanapp.com/api/v4/video/related?id=186175")
+        val url=intent.getStringExtra("url")?:""
+        mOthersViewModel.getOthersData(intent.getIntExtra("id",0))
         mOthersViewModel.othersData.observe(this@VideoActivity){
             val list = it.filter {element->
                 element.type == "videoSmallCard"
@@ -54,39 +67,33 @@ class VideoActivity : AppCompatActivity() {
             adapter = mAdapter
             layoutManager= LinearLayoutManager(this@VideoActivity)
         }
+        playVideo(url)
     }
 
-//    private fun playVideo() {
-//        mBinding.video.player?.run {
-//            repeatMode=Player.REPEAT_MODE_ONE
-//            playWhenReady=true
-//            val mediaItem= MediaItem.fromUri("https://eyepetizer-videos.oss-cn-beijing.aliyuncs.com/video_poster_share/d336cfef0ca7e778dfca5d9ed56ec6ce.mp4")
-//            setMediaItem(mediaItem)
-//            prepare()
-//        }
-//    }
-//    override fun onPause() {
-//        super.onPause()
-//        if (mBinding.video.player != null) {
-//            mBinding.video.player?.playWhenReady = false
-//        }
-//    }
-//    override fun onResume() {
-//        super.onResume()
-//        mBinding.video.player.let {
-//            it?.playWhenReady = true
-//        }
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        if (mBinding.video.player != null) {
-//            mBinding.video.player?.playWhenReady = false
-//        }
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        mBinding.video.player?.release()
-//    }
+    private fun playVideo(url: String) {
+        val controller = StandardVideoController(this)
+        controller.addDefaultControlComponent("title", false)
+        mBinding.video.setVideoController(controller) //设置控制器
+        mBinding.video.setUrl(url) //设置视频地址
+        mBinding.video.start() //开始播放，不调用则不自动播放
+    }
+    override fun onPause() {
+        super.onPause()
+        mBinding.video.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mBinding.video.resume()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.video.release()
+    }
+    override fun onBackPressed() {
+        if (!mBinding.video.onBackPressed()) {
+            super.onBackPressed()
+        }
+    }
 }
