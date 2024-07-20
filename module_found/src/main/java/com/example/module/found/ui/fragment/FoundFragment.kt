@@ -60,14 +60,13 @@ class FoundFragment : Fragment() {
         getData()
 
         mbinding?.tvGotoSpecialAll?.setOnClickListener {
-            //val args= bundleOf("specialList" to specialList)
+
             Log.d("specialList", "onViewCreated: $specialList")
+
             if (specialList.isNotEmpty()) {
-                //val intent = Intent(requireActivity(), SpecialAllActivity::class.java)
-                //intent.putExtra("specialList", specialList.toString())
                 startActivity(Intent(requireActivity(), SpecialAllActivity::class.java))
             }
-            //startActivity(Intent(requireActivity(), SpecialAllActivity::class.java))
+
         }
 
     }

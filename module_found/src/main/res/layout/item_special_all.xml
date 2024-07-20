@@ -38,7 +38,7 @@
             android:ellipsize="end"
             android:padding="5dp"
             android:text="简介简介简介简介简介简介简介简介简介..."
-            android:textSize="10dp" />
+            android:textSize="13dp" />
     </LinearLayout>
 
 
