@@ -2,12 +2,11 @@ package com.example.module.home.helper
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
 import com.example.module.home.adapter.DailyBannerAdapter
 import com.example.module.home.adapter.DailyRvAdapter
 import com.example.module.home.bean.DvItem
-import com.example.module.home.util.MyTransformer
+import com.example.module.home.util.BannerTransformer
 
 /**
  * description : Banner轮播
@@ -30,7 +29,7 @@ class BannerHelper {
         viewPager2Adapter.submitList(rv.bannerList)
         mViewPager2.adapter = viewPager2Adapter
         mViewPager2.offscreenPageLimit=3
-        mViewPager2.setPageTransformer(MyTransformer())
+        mViewPager2.setPageTransformer(BannerTransformer())
         //开始轮播
         startRun()
 //        //触摸事件

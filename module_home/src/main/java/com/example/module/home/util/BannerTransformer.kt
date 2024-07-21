@@ -8,7 +8,7 @@ import kotlin.math.abs
  * author : QTwawa
  * date : 2024/7/20 12:03
  */
-class MyTransformer:ViewPager2.PageTransformer {
+class BannerTransformer:ViewPager2.PageTransformer {
     override fun transformPage(page: View, position: Float) {
         val pageWidth = page.width
         val pageHeight = page.height

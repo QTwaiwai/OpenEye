@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#A96B70"
+            android:background="#651414"
             app:navigationIcon="@drawable/back"
             app:layout_scrollFlags="scroll|enterAlways"
             app:titleTextColor="@color/white"/>
@@ -36,7 +36,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F9C8D4">
+            android:background="#70574F">
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="28dp"
-                android:background="@drawable/like"
+                android:src="@drawable/like"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_description" />
             <TextView
@@ -124,21 +124,24 @@
                 app:layout_constraintStart_toEndOf="@id/iv_star"
                 app:layout_constraintTop_toTopOf="@id/iv_star" />
 
+
             <TextView
-                android:id="@+id/tv_share"
-                android:layout_width="30dp"
+                android:id="@+id/tv_related"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="收藏"
-                android:textColor="@color/white"
+                android:text="相关视频"
+                android:textSize="25dp"
+                android:background="#505050"
                 android:gravity="center"
-                app:layout_constraintStart_toStartOf="@id/iv_share"
-                app:layout_constraintTop_toBottomOf="@id/iv_share"/>
+                android:textColor="@color/white"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_star"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_others"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tv_star"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_related"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

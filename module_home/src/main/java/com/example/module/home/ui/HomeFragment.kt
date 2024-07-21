@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.module.home.adapter.HomeAdapter
 import com.example.module.home.databinding.FgHomeBinding
+import com.example.module.home.util.TabTransformer
 import com.google.android.material.tabs.TabLayoutMediator
 
 /**
@@ -38,6 +39,7 @@ class HomeFragment : Fragment() {
         fragments.add(DailyFragment())
         fragments.add(RecommendFragment())
         mBinding.vp2HomeContent.adapter = HomeAdapter(fragments, childFragmentManager, lifecycle)
+        mBinding.vp2HomeContent.setPageTransformer(TabTransformer())
         TabLayoutMediator(mBinding.tabHome, mBinding.vp2HomeContent) { tab, position ->
             tab.text = when (position) {
                 0 -> "日报"

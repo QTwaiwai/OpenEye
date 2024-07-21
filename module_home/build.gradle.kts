@@ -49,6 +49,7 @@ kapt {
 
 dependencies {
     implementation(project(":lib_net"))
+    implementation(project(":lib_base"))
     implementation(project(":module_video"))
     implementation(project(":module_found"))
     implementation(project(":module_community"))
