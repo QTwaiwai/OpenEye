@@ -40,6 +40,11 @@ android {
         enable = true
     }
 }
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+    }
+}
 
 dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")

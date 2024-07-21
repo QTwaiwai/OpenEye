@@ -95,7 +95,7 @@ class DailyFragment : Fragment() {
                 val childView = mBinding.rvHomeDaily.findChildViewUnder(event.x, event.y)
                 if (childView != null) {
                     val position = mBinding.rvHomeDaily.getChildAdapterPosition(childView)
-                    mBinding.rvHomeDaily.isScrollEnabled = position != 0
+                    mBinding.rvHomeDaily.isScrollEnabled = position > 2
                 }
             }
             false

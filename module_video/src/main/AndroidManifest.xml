@@ -6,8 +6,10 @@
         <activity
             android:name=".ui.VideoActivity"
             android:exported="true"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"/>
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".ui.PhotoGraphActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
     </application>
 
 </manifest>

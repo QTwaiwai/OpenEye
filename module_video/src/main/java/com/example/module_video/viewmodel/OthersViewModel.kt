@@ -1,6 +1,7 @@
 package com.example.module_video.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.lib_net.RetrofitClient
@@ -19,7 +20,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  */
 class OthersViewModel:ViewModel() {
     private val _othersData = MutableLiveData<List<Item>>()
-    val othersData: MutableLiveData<List<Item>>
+    val othersData: LiveData<List<Item>>
         get() = _othersData
     private val othersService= RetrofitClient.getService(OthersService::class.java)
 

@@ -1,11 +1,17 @@
 package com.example.module_video.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.module_video.LikeAnimation
+import com.example.module_video.R
 import com.example.module_video.adapter.OthersAdapter
 import com.example.module_video.databinding.ActivityVideoBinding
 import com.example.module_video.viewmodel.OthersViewModel
@@ -28,12 +34,19 @@ class VideoActivity : AppCompatActivity() {
     private val mAdapter: OthersAdapter by lazy {
         OthersAdapter()
     }
+    private lateinit var url:String
+    private var isLiked= false
+    private var isStared= false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
         ARouter.getInstance().inject(this)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = resources.getColor(R.color.white, null)
         initView()
+        initEvent()
     }
+
 
     @SuppressLint("SetTextI18n")
     private fun initView() {
@@ -44,8 +57,8 @@ class VideoActivity : AppCompatActivity() {
             tvLikes.text=intent.getIntExtra("likes",0).toString()
             tvTag.text="#"+intent.getStringExtra("tag")
             tvStar.text=intent.getIntExtra("star",0).toString()
-            tvShare.text=intent.getIntExtra("share",0).toString()
             toolbar.title=intent.getStringExtra("title")
+            url= intent.getStringExtra("url").toString()
         }
         setSupportActionBar(mBinding.toolbar)
         supportActionBar?.apply {
@@ -55,7 +68,6 @@ class VideoActivity : AppCompatActivity() {
         mBinding.toolbar.setNavigationOnClickListener {
             finish()
         }
-        val url=intent.getStringExtra("url")?:""
         mOthersViewModel.getOthersData(intent.getIntExtra("id",0))
         mOthersViewModel.othersData.observe(this@VideoActivity){
             val list = it.filter {element->
@@ -70,13 +82,53 @@ class VideoActivity : AppCompatActivity() {
         playVideo(url)
     }
 
+
+    @SuppressLint("SetTextI18n")
+    private fun initEvent() {
+        mBinding.ivLikes.setOnClickListener {
+           if(!isLiked){
+               mBinding.ivLikes.setImageResource(R.drawable.liked)
+               mBinding.tvLikes.text= (mBinding.tvLikes.text.toString().toInt()+1).toString()
+               LikeAnimation.animateLike(mBinding.ivLikes)
+               isLiked=true
+           }else{
+               mBinding.ivLikes.setImageResource(R.drawable.like)
+               mBinding.tvLikes.text= (mBinding.tvLikes.text.toString().toInt()-1).toString()
+               LikeAnimation.animateLike(mBinding.ivLikes)
+               isLiked=false
+           }
+        }
+        mBinding.ivStar.setOnClickListener {
+            if(!isStared){
+                mBinding.ivStar.setImageResource(R.drawable.stared)
+                mBinding.tvStar.text= (mBinding.tvStar.text.toString().toInt()+1).toString()
+                LikeAnimation.animateLike(mBinding.ivStar)
+                isStared=true
+            }else{
+                mBinding.ivStar.setImageResource(R.drawable.star)
+                mBinding.tvStar.text= (mBinding.tvStar.text.toString().toInt()-1).toString()
+                LikeAnimation.animateLike(mBinding.ivStar)
+                isStared=false
+            }
+        }
+        mBinding.ivShare.setOnClickListener {
+           val shareIntent = Intent().apply {
+               action = Intent.ACTION_SEND
+               type = "text/plain"
+               putExtra(Intent.EXTRA_TEXT, url)
+           }
+           startActivity(Intent.createChooser(shareIntent, "分享视频到"))
+        }
+    }
+
     private fun playVideo(url: String) {
         val controller = StandardVideoController(this)
-        controller.addDefaultControlComponent("title", false)
+        controller.addDefaultControlComponent(mBinding.tvTitle.text.toString(), false)
         mBinding.video.setVideoController(controller) //设置控制器
         mBinding.video.setUrl(url) //设置视频地址
         mBinding.video.start() //开始播放，不调用则不自动播放
     }
+
     override fun onPause() {
         super.onPause()
         mBinding.video.pause()

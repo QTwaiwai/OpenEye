@@ -29,7 +29,7 @@ class DailyViewModel : ViewModel() {
     val url: LiveData<String>
         get() = _url
     private val _dailyVp2Data = MutableLiveData<List<DvItem>>()
-    val dailyVpData: MutableLiveData<List<DvItem>>
+    val dailyVpData: LiveData<List<DvItem>>
         get() = _dailyVp2Data
     private val serviceRv = RetrofitClient.getService(DailyRvService::class.java)
     private val serviceVp2 = RetrofitClient.getService(DailyVp2Service::class.java)
