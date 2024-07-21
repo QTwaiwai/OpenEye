@@ -43,6 +43,10 @@ kapt {
 
 
 dependencies {
+    implementation("xyz.doikki.android.dkplayer:dkplayer-java:3.3.6")
+    implementation("xyz.doikki.android.dkplayer:player-exo:3.3.6")
+    implementation("xyz.doikki.android.dkplayer:player-ijk:3.3.6")
+    implementation("xyz.doikki.android.dkplayer:dkplayer-ui:3.3.6")
     implementation(libs.transportation.consumer)
     implementation ("com.alibaba:arouter-api:1.5.2")
     kapt  ("com.alibaba:arouter-compiler:1.5.2")

@@ -1,7 +1,8 @@
 plugins {
-    alias(libs.plugins.android.application)
+//    alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    //id("com.android.library")
+    id("com.android.library")
+    id("kotlin-kapt")
 }
 
 android {
@@ -10,11 +11,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
-       applicationId = "com.example.module.community"
+//       applicationId = "com.example.module.community"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+//        versionCode = 1
+//        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,8 +39,14 @@ android {
         jvmTarget = "1.8"
     }
 }
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+    }
+}
 
 dependencies {
+    implementation(project(":lib_base"))
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
 
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
@@ -56,7 +63,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")
 
-    implementation(project(":lib_base"))
+
     implementation(project(":lib_net"))
 
     implementation(libs.androidx.core.ktx)

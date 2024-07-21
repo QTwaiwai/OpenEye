@@ -1,5 +1,6 @@
 package com.example.module.home.adapter
 
+import android.graphics.Bitmap
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.module.home.R
 import com.example.module.home.bean.RecItem
-import com.example.module.home.bean.RecommendData
 
 /**
  * description : RecommendAdapter
@@ -65,9 +68,13 @@ class RecommendAdapter(private val context: Fragment) :
                 "video" -> {
                     ivRecommendType.setImageResource(R.drawable.ic_play)
                 }
-
                 else -> {
                     ivRecommendType.setImageResource(R.drawable.ic_photo)
+                    ivRecommendCover.setOnClickListener {
+                        ARouter.getInstance().build("/video/PhotoGraphActivity")
+                            .withString("picture",data.data.content.data.cover.detail.replace("http", "https"))
+                            .navigation(context.activity?.application?.applicationContext)
+                    }
                 }
             }
             tvRecommendAuthor.text = data.data.content.data.owner.nickname
