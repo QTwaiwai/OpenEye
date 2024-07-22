@@ -1,6 +1,7 @@
 package com.example.module.home.ViewModel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,9 @@ class DailyViewModel : ViewModel() {
     private val _dailyVp2Data = MutableLiveData<List<DvItem>>()
     val dailyVpData: LiveData<List<DvItem>>
         get() = _dailyVp2Data
+    private val _isConnect = MutableLiveData<Boolean>()
+    val isConnect: LiveData<Boolean>
+        get() = _isConnect
     private val serviceRv = RetrofitClient.getService(DailyRvService::class.java)
     private val serviceVp2 = RetrofitClient.getService(DailyVp2Service::class.java)
 
@@ -39,7 +43,7 @@ class DailyViewModel : ViewModel() {
         getDailyRvData()
     }
 
-    private fun getDailyVpData() {
+    fun getDailyVpData() {
         serviceVp2
             .getDailyVp2Data()
             .subscribeOn(Schedulers.io())
@@ -60,7 +64,7 @@ class DailyViewModel : ViewModel() {
             })
     }
 
-    private fun getDailyRvData() {
+    fun getDailyRvData() {
         serviceRv
             .getDailyRvData()
             .subscribeOn(Schedulers.io())
@@ -70,12 +74,13 @@ class DailyViewModel : ViewModel() {
                 }
 
                 override fun onNext(t: DailyRvData) {
+                    _isConnect.value=true
                     _url.value = t.nextPageUrl
                     _dailyRvData.postValue(t.itemList)
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.e("NET", "onError: ${e.message}")
+                    _isConnect.value=false
                 }
 
                 override fun onComplete() {
@@ -93,13 +98,14 @@ class DailyViewModel : ViewModel() {
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.e("NET2", "onError: ${e.message}")
+                    _isConnect.value=false
                 }
 
                 override fun onComplete() {
                 }
 
                 override fun onNext(t: DailyRvData) {
+                    _isConnect.value=true
                     Log.d("NET", "onNext: ${t.itemList}")
                     _url.value = t.nextPageUrl
                     _dailyRvData.value = _dailyRvData.value?.plus(t.itemList)

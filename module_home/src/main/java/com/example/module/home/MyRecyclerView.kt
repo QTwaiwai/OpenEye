@@ -22,11 +22,10 @@ class MyRecyclerView @JvmOverloads constructor(
         if (e != null) {
             when (e.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    parent.requestDisallowInterceptTouchEvent(true)
+                    parent.requestDisallowInterceptTouchEvent(true)//让父布局不拦截事件，传到Rv来
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-
                     if (isScrollEnabled) {
                         parent.requestDisallowInterceptTouchEvent(false)
                     }
