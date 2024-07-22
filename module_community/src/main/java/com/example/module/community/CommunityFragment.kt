@@ -9,10 +9,10 @@ import com.example.module.community.databinding.FragmentCommunityBinding
 import com.example.module.community.viewmodel.TabViewModel
 import kotlinx.coroutines.launch
 
-class CommunityFragment : BaseFragment<FragmentCommunityBinding>(), Deliver {
+class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
     private lateinit var vmTab: TabViewModel
 
-    private var deliver: Deliver? = null
+    //private var deliver: Deliver? = null
 
     /*override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -57,8 +57,8 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(), Deliver {
     override fun getViewBinding(): FragmentCommunityBinding =
         FragmentCommunityBinding.inflate(layoutInflater)
 
-    override fun deliverId(id: String) {
-        /*lifecycleScope.launch {
+    /*override fun deliverId(id: String) {
+        *//*lifecycleScope.launch {
             vmTab.getChildTabData(id)
 
             vmTab.childTabStateFlow.collectLatest {
@@ -66,9 +66,9 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(), Deliver {
 
                 }
             }
-        }*/
+        }*//*
     }
-
+*/
     /*override fun deliverId(id: String) {
         lifecycleScope.launch {
             vmTab.getChildTabData(id)
@@ -82,7 +82,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(), Deliver {
     }*/
 
 }
-
+/*
 interface Deliver {
     fun deliverId(id: String)
-}
+}*/

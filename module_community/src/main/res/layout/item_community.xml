@@ -16,6 +16,7 @@
         android:textSize="18dp" />
 
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_child_tab"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="20dp" />

@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.module.community.ChildTabActivity
 import com.example.module.community.bean.TabListBean
 import com.example.module.community.databinding.ItemCommunityBinding
+import com.example.module.community.viewmodel.TabViewModel
 
 /**
  * author : zeq
@@ -20,6 +22,7 @@ class TabAdapter(private val tabListBean: TabListBean) :
         RecyclerView.ViewHolder(binding.root) {
 
         val tvName: TextView = binding.tvCommunityTabName
+        val vpChild: ViewPager2 = binding.vpChildTab
 
         init {
             initListener()
@@ -40,7 +43,7 @@ class TabAdapter(private val tabListBean: TabListBean) :
                 } else
                     ChildTabActivity.startChild(
                         itemView.context,
-                        "0?isRecTab=true",
+                        "0",
                         childTab.name
                     )
             }
@@ -58,5 +61,12 @@ class TabAdapter(private val tabListBean: TabListBean) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.tvName.text = tabListBean.tabInfo.tabList[position].name
+
+        val url = tabListBean.tabInfo.tabList[position].apiUrl
+
+        holder.vpChild.apply {
+            //adapter = ChildVpAdapter()
+            offscreenPageLimit = 3
+        }
     }
 }
