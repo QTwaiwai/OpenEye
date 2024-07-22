@@ -35,8 +35,8 @@ class VideoActivity : AppCompatActivity() {
         OthersAdapter()
     }
     private lateinit var url:String
-    private var isLiked= false
-    private var isStared= false
+    private var isStared=false
+    private var isLiked=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
@@ -67,6 +67,17 @@ class VideoActivity : AppCompatActivity() {
         }
         mBinding.toolbar.setNavigationOnClickListener {
             finish()
+        }
+        val recorded = getSharedPreferences(intent.getIntExtra("id",0).toString(), MODE_PRIVATE)
+        isLiked=recorded.getBoolean("isLiked",false)
+        isStared=recorded.getBoolean("isStared",false)
+        if(isLiked){
+            mBinding.ivLikes.setImageResource(R.drawable.liked)
+            mBinding.tvLikes.text= (mBinding.tvLikes.text.toString().toInt()+1).toString()
+        }
+        if(isStared){
+            mBinding.ivStar.setImageResource(R.drawable.stared)
+            mBinding.tvStar.text= (mBinding.tvStar.text.toString().toInt()+1).toString()
         }
         mOthersViewModel.getOthersData(intent.getIntExtra("id",0))
         mOthersViewModel.othersData.observe(this@VideoActivity){
@@ -111,6 +122,7 @@ class VideoActivity : AppCompatActivity() {
                 isStared=false
             }
         }
+        //视频分享
         mBinding.ivShare.setOnClickListener {
            val shareIntent = Intent().apply {
                action = Intent.ACTION_SEND
@@ -147,5 +159,20 @@ class VideoActivity : AppCompatActivity() {
         if (!mBinding.video.onBackPressed()) {
             super.onBackPressed()
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
+    }
+
+    override fun finish() {
+        val record=getSharedPreferences(intent.getIntExtra("id",0).toString(), MODE_PRIVATE).edit()
+        record.apply {
+            putBoolean("isLiked",isLiked)
+            putBoolean("isStared",isStared)
+            apply()
+        }
+        super.finish()
     }
 }

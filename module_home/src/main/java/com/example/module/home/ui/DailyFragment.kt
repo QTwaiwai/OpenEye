@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.module.home.ViewModel.DailyViewModel
 import com.example.module.home.adapter.DailyRvAdapter
 import com.example.module.home.databinding.FgHomeDailyBinding
@@ -49,7 +51,6 @@ class DailyFragment : Fragment() {
         initRvView()
         initBanner()
         onScroll()
-
     }
 
     private fun initBanner() {
@@ -75,6 +76,20 @@ class DailyFragment : Fragment() {
         mBinding.rvHomeDaily.apply {
             adapter = mRvAdapter
             layoutManager = LinearLayoutManager(context)
+        }
+        //刷新再次请求数据
+        mBinding.srlHomeDaily.setOnRefreshListener {
+            mBinding.srlHomeDaily.postDelayed({
+                mDailyViewModel.getDailyVpData()
+                mDailyViewModel.getDailyRvData()
+                mBinding.srlHomeDaily.isRefreshing = false
+            },2000)
+        }
+        //没有网的时候就报
+        mDailyViewModel.isConnect.observe(viewLifecycleOwner) {
+            if (!it) {
+               Toast.makeText(context, "网络连接失败", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

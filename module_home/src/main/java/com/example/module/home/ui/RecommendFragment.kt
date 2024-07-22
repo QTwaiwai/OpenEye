@@ -1,7 +1,6 @@
 package com.example.module.home.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +55,7 @@ class RecommendFragment : Fragment() {
             url = it.replace("http", "https")
         }
     }
-
+    //滑动逻辑
     private fun onScroll() {
         mBinding.rvHomeRecommend.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -67,6 +66,4 @@ class RecommendFragment : Fragment() {
             }
         })
     }
-
-
 }
