@@ -1,5 +1,7 @@
 package com.example.module.community.net.apiservice
 
+import android.database.Observable
+import com.example.module.community.bean.ChildTabBean
 import com.example.module.community.bean.Item
 import com.example.module.community.bean.TabListBean
 import retrofit2.Call
@@ -15,6 +17,6 @@ interface TabService {
     @GET("api/v7/tag/tabList")
     suspend fun getCommunityTab(): TabListBean
 
-    @GET
-    fun getVpData(@Url url: String): Call<List<Item>>
+    /*@GET
+    suspend fun getVpData(@Url url: String): Observable<ChildTabBean>*/
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.lib.base.BaseActivity
 import com.example.module.community.adapter.ChildTabAdapter
 import com.example.module.community.databinding.ActivityChildTabBinding
+import com.example.module.community.viewmodel.ChildTabViewModel
 import com.example.module.community.viewmodel.TabViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -57,7 +58,7 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
         //请求ChildTab的数据
         lifecycleScope.launch {
 
-            vmTab.childTabStateFlow.collectLatest {
+            vmTab.childTabStateFlow.collect {
                 if (it != null) {
                     Log.d("zzzzzzzzzeeee", "getChildData: $it")
                     childAdapter.submitList(it)
@@ -68,8 +69,7 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
 
         vmTab.url.observe(this@ChildTabActivity) { nextPageUrl ->
             Log.d("nextPageUrl", "getChildData: $nextPageUrl")
-            /*if (nextPageUrl == null) {
-            }*/
+
             url = nextPageUrl?.replace("http", "https")
         }
 
@@ -86,8 +86,7 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
                     val pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
                     if (url != null && (visibleItemCount + pastVisibleItems) >= totalItemCount) {
                         vmTab.getMoreChildTabData(id, url!!)
-                    }
-                    else{
+                    } else {
                         mBinding.tvEnd.visibility = View.VISIBLE
 
                     }

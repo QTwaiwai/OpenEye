@@ -1,13 +1,11 @@
 package com.example.module.found.ui.fragment
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -60,9 +58,6 @@ class FoundFragment : Fragment() {
         getData()
 
         mbinding?.tvGotoSpecialAll?.setOnClickListener {
-
-            Log.d("specialList", "onViewCreated: $specialList")
-
             if (specialList.isNotEmpty()) {
                 startActivity(Intent(requireActivity(), SpecialAllActivity::class.java))
             }
@@ -80,7 +75,6 @@ class FoundFragment : Fragment() {
                 if (it != null) {
                     specialList = it
                     mbinding!!.rvSpecialPreview.adapter = SpecialPreviewAdapter(it)
-                   // deliver?.deliverSpecialData(specialList)
                 }
             }
         }
@@ -100,8 +94,5 @@ class FoundFragment : Fragment() {
                 }
             }
         }
-    }
-    interface DeliverData {
-        fun deliverSpecialData(specialList: List<SpecialDetailBean>)
     }
 }

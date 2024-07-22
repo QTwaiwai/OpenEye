@@ -1,5 +1,6 @@
 package com.example.module.community.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.example.module.community.bean.ChildTabBean
 import com.example.module.community.bean.Item
 import com.example.module.community.bean.TabListBean
 import com.example.module.community.net.CommunityNet
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,27 +27,11 @@ class TabViewModel : ViewModel() {
     val tabStateFlow: StateFlow<TabListBean?>
         get() = _mutableTabStateFlow.asStateFlow()
 
-    //private lateinit var childList: MutableList<ChildTabBean>
-
-
     fun getTabData() {
         viewModelScope.launch {
             try {
                 val response = CommunityNet.tabService.getCommunityTab()
-                val apiUrlId: List<String> = response.tabInfo.tabList.map {
-                    it.apiUrl.split('/').lastOrNull().toString() // 获取路径参数，如果存在的话
-                }
-
-                /*var responseItem: ChildTabBean
-                for (id in apiUrlId) {
-                    responseItem = if (id == "0") {
-                        CommunityNet.childTabService.getChildTab(id, "true", "", "")
-
-                    } else {
-                        CommunityNet.childTabService.getChildTab(id, "", "", "")
-                    }
-                    childList.add(responseItem)
-                }*/
+                Log.d("ZeqResponse", "getTabData: $response")
                 _mutableTabStateFlow.emit(response)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -70,7 +56,6 @@ class TabViewModel : ViewModel() {
                 } else {
                     CommunityNet.childTabService.getChildTab(id, "", "", "")
                 }
-
                 _url.value = response.nextPageUrl
                 _mutableChildTabStateFlow.emit(response.itemList)
             } catch (e: Exception) {

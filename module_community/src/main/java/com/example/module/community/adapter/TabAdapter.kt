@@ -1,11 +1,13 @@
 package com.example.module.community.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.module.community.ChildTabActivity
+import com.example.module.community.bean.ChildTabBean
 import com.example.module.community.bean.TabListBean
 import com.example.module.community.databinding.ItemCommunityBinding
 import com.example.module.community.viewmodel.TabViewModel
@@ -15,7 +17,10 @@ import com.example.module.community.viewmodel.TabViewModel
  * email : 1301731619@qq.com
  * date : 2024/7/20 11:41
  */
-class TabAdapter(private val tabListBean: TabListBean) :
+class TabAdapter(
+    private val tabListBean: TabListBean,
+    private val childTab: MutableList<ChildTabBean>
+) :
     RecyclerView.Adapter<TabAdapter.ViewHolder>() {
 
     inner class ViewHolder(binding: ItemCommunityBinding) :
@@ -60,13 +65,13 @@ class TabAdapter(private val tabListBean: TabListBean) :
     override fun getItemCount(): Int = tabListBean.tabInfo.tabList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvName.text = tabListBean.tabInfo.tabList[position].name
+        val item = tabListBean.tabInfo.tabList[position]
+        Log.d("ZeqItem", "onBindViewHolder: $item")
+        val childItem = childTab[position]
+        Log.d("ZeqChildItem", "onBindViewHolder: $childItem")
 
-        val url = tabListBean.tabInfo.tabList[position].apiUrl
+        holder.tvName.text = item.name
 
-        holder.vpChild.apply {
-            //adapter = ChildVpAdapter()
-            offscreenPageLimit = 3
-        }
+        holder.vpChild.adapter = ChildVpAdapter(childItem.itemList)
     }
 }
