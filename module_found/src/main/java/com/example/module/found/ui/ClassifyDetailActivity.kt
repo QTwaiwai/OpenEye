@@ -1,13 +1,17 @@
 package com.example.module.found.ui
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lib.base.BaseActivity
+import com.example.module.found.R
 import com.example.module.found.adapter.ClassifyDetailAdapter
 import com.example.module.found.bean.ClassifyDetail
 import com.example.module.found.databinding.ActivityClassifyDetailBinding
@@ -16,17 +20,28 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
-    private lateinit var classifyDetailList:ClassifyDetail
+    private lateinit var classifyDetailList: ClassifyDetail
     private lateinit var mViewModel: ClassifyViewModel
 
     companion object {
-        fun startDetail(context: Context, id: String, name: String, desc: String) {
+        fun startDetail(
+            context: Context,
+            id: String,
+            desc: String,
+            tvClassify: TextView
+        ) {
+
             val intent = Intent(context, ClassifyDetailActivity::class.java).apply {
                 putExtra("id", id)
-                putExtra("title", name)
                 putExtra("desc", desc)
+                putExtra("tvClassify", tvClassify.text)
             }
-            context.startActivity(intent)
+            val options = ActivityOptions.makeSceneTransitionAnimation(
+                context as Activity,
+                tvClassify,
+                tvClassify.transitionName
+            )
+            context.startActivity(intent, options.toBundle())
         }
     }
 
@@ -34,7 +49,7 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
         //设置toolbar的标题，和对应栏目的描述
         setSupportActionBar(mBinding.toolbarDetail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        mBinding.collapsingToolbarDetail.title = intent.getStringExtra("title")
+        mBinding.collapsingToolbarDetail.title = intent.getStringExtra("tvClassify")
         mBinding.tvDetailDesc.text = intent.getStringExtra("desc")
 
         // 初始化 ViewModel

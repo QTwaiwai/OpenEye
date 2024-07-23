@@ -1,10 +1,13 @@
 package com.example.module.found.ui
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,12 +29,21 @@ class SpecialDetailActivity : BaseActivity<ActivitySpecialDetailBinding>() {
     private lateinit var vmSpecial: SpecialViewModel
 
     companion object {
-        fun actionStart(context: Context, id: String, imgUrl: String) {
+        fun actionStart(context: Context, id: String, imgUrl: String, imgSpecial: ImageView) {
+
             val intent = Intent(context, SpecialDetailActivity::class.java).apply {
                 putExtra("id", id)
                 putExtra("imgUrl", imgUrl)
+               //putExtra("imgId", imgSpecial.id)
             }
-            context.startActivity(intent)
+
+            val option = ActivityOptions.makeSceneTransitionAnimation(
+                context as Activity,
+                imgSpecial,
+                imgSpecial.transitionName
+            )
+
+            context.startActivity(intent,option.toBundle())
         }
     }
 

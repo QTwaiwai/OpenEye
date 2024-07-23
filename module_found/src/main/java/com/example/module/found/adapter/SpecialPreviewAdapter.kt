@@ -34,7 +34,8 @@ class SpecialPreviewAdapter(private val SpecialBeanList: List<SpecialDetailBean>
                 SpecialDetailActivity.actionStart(
                     itemView.context,
                     special.id.toString(),
-                    special.headerImage.replace("http://", "https://")
+                    special.headerImage.replace("http://", "https://"),
+                    imgSpecial
                 )
             }
         }

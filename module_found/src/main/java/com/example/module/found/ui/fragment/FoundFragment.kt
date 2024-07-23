@@ -31,7 +31,6 @@ class FoundFragment : Fragment() {
     private lateinit var classifyList: List<ClassifyBean>
     private lateinit var specialList: List<SpecialDetailBean>
 
-    //private var deliver: DeliverData? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 初始化 ViewModel
@@ -58,6 +57,7 @@ class FoundFragment : Fragment() {
         getData()
 
         mbinding?.tvGotoSpecialAll?.setOnClickListener {
+
             if (specialList.isNotEmpty()) {
                 startActivity(Intent(requireActivity(), SpecialAllActivity::class.java))
             }

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     //id("com.android.library")
+    id("kotlin-kapt")
 }
 
 android {
@@ -39,6 +40,12 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.name)
+    }
+}
+
 dependencies {
     implementation ("androidx.viewpager2:viewpager2:1.0.0")
 
@@ -55,6 +62,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")
+
+    implementation ("com.alibaba:arouter-api:1.5.2")
+    kapt  ("com.alibaba:arouter-compiler:1.5.2")
 
     implementation(project(":lib_base"))
     implementation(project(":lib_net"))

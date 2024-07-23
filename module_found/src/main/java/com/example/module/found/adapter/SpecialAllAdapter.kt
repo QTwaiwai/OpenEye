@@ -53,7 +53,8 @@ class SpecialAllAdapter :
                 SpecialDetailActivity.actionStart(
                     itemView.context,
                     special.id.toString(),
-                    special.headerImage.replace("http://", "https://")
+                    special.headerImage.replace("http://", "https://"),
+                    imgSpecialAll
                 )
 
             }
@@ -77,6 +78,8 @@ class SpecialAllAdapter :
         Glide.with(holder.itemView.context)
             .load(imgPreviewUrl)
             .into(holder.imgSpecialAll)
+        holder.imgSpecialAll.transitionName = "transformation$position"
+
         holder.tvSpecialAllTitle.text = special.brief
         holder.tvSpecialAllDesc.text = special.text
     }

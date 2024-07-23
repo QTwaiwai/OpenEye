@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.example.lib.base.timeConversion
 import com.example.module.found.bean.SpecialDetailBean
@@ -31,7 +32,21 @@ class SpecialDetailAdapter(private val specialDetailBean: SpecialDetailBean) :
         }
 
         private fun initListener() {
+            itemView.setOnClickListener {
+                val data = specialDetailBean.itemList[bindingAdapterPosition]
 
+                ARouter.getInstance().build("/video/VideoActivity")
+                    .withString("title",data.data.content.data.title)
+                    .withString("author",data.data.content.data.author.name)
+                    .withString("description",data.data.content.data.description)
+                    .withInt("likes",data.data.content.data.consumption.collectionCount)
+                    .withString("tag",data.data.content.data.category)
+                    .withInt("share",data.data.content.data.consumption.shareCount)
+                    .withInt("star",data.data.content.data.consumption.realCollectionCount)
+                    .withString("url",data.data.content.data.playUrl.replace("http", "https"))
+                    .withInt("id",data.data.content.data.id)
+                    .navigation()
+            }
         }
     }
 

@@ -20,9 +20,9 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
 
 
     private fun getChildBean() {
-        vmChild.getChildTabData()
-
         lifecycleScope.launch {
+            vmChild.getChildTabData()
+
             vmChild.childTabStateFlow.collect {
                 it?.let {
                     Log.d("Zeq", "getTabData: $it")
@@ -44,9 +44,8 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
     }
 
     private fun getTabData() {
-        vmTab.getTabData()
-
         lifecycleScope.launch {
+            vmTab.getTabData()
 
             vmTab.tabStateFlow.collect {
                 if (it != null) {

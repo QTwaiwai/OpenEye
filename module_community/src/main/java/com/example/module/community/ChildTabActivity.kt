@@ -86,9 +86,6 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
                     val pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
                     if (url != null && (visibleItemCount + pastVisibleItems) >= totalItemCount) {
                         vmTab.getMoreChildTabData(id, url!!)
-                    } else {
-                        mBinding.tvEnd.visibility = View.VISIBLE
-
                     }
                 }
             }

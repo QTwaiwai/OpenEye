@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/grey"
+            android:transitionName="jump"
             app:contentScrim="@color/purple_200"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
