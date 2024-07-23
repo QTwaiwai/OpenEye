@@ -1,0 +1,42 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:2:1-15:12
+	package
+		INJECTED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:3:5-66
+	android:name
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:3:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:4:5-78
+	android:name
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:4:22-76
+application
+ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:5:5-13:19
+activity#com.example.module_video.ui.VideoActivity
+ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:6:9-9:77
+	android:exported
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:8:13-36
+	android:configChanges
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:9:13-74
+	android:name
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:7:13-45
+activity#com.example.module_video.ui.PhotoGraphActivity
+ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:10:9-12:77
+	android:exported
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:11:13-36
+	android:configChanges
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:12:13-74
+	android:name
+		ADDED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:10:19-56
+uses-sdk
+INJECTED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml
+INJECTED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml
