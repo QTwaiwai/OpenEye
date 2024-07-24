@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lib.base.BaseActivity
 import com.example.module.community.adapter.ChildTabAdapter
+import com.example.module.community.bean.ChildTabBean
 import com.example.module.community.databinding.ActivityChildTabBinding
 import com.example.module.community.viewmodel.ChildTabViewModel
 import com.example.module.community.viewmodel.TabViewModel
@@ -54,22 +55,19 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
     }
 
     private fun getChildData(id: String) {
-        vmTab.getChildTabData(id)
         //请求ChildTab的数据
         lifecycleScope.launch {
+            vmTab.getChildTabData(id)
+
 
             vmTab.childTabStateFlow.collect {
                 if (it != null) {
-                    Log.d("zzzzzzzzzeeee", "getChildData: $it")
                     childAdapter.submitList(it)
-
                 }
             }
         }
 
         vmTab.url.observe(this@ChildTabActivity) { nextPageUrl ->
-            Log.d("nextPageUrl", "getChildData: $nextPageUrl")
-
             url = nextPageUrl?.replace("http", "https")
         }
 

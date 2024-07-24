@@ -28,7 +28,7 @@ class TabViewModel : ViewModel() {
         get() = _mutableTabStateFlow.asStateFlow()
 
     fun getTabData() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = CommunityNet.tabService.getCommunityTab()
                 Log.d("ZeqResponse", "getTabData: $response")
@@ -57,6 +57,7 @@ class TabViewModel : ViewModel() {
                     CommunityNet.childTabService.getChildTab(id, "", "", "")
                 }
                 _url.value = response.nextPageUrl
+                Log.d("zeq", "getChildTabData: ${response.itemList}")
                 _mutableChildTabStateFlow.emit(response.itemList)
             } catch (e: Exception) {
                 e.printStackTrace()

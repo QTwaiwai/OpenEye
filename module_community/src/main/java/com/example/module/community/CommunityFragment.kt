@@ -27,6 +27,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
                 it?.let {
                     Log.d("Zeq", "getTabData: $it")
                     childTab.addAll(it)
+                    getTabData()
                 }
             }
         }
@@ -40,7 +41,6 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
         mbinding.rvCommunityTab.layoutManager = LinearLayoutManager(activity)
 
         getChildBean()
-        getTabData()
     }
 
     private fun getTabData() {

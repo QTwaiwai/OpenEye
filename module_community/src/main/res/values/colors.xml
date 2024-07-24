@@ -9,4 +9,9 @@
     <color name="grey">#DBDBDB</color>
     <color name="dark_grey">#8A8E86</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="pink">#FFD2D6</color>
+    <color name="blue_moon">#C8E0F2</color>
+    <color name="green">#B0D468</color>
+    <color name="lemon_yellow">#FADE3D</color>
 </resources>

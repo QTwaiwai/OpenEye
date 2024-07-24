@@ -8,7 +8,7 @@
         android:id="@+id/tv_community_tab_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:padding="5dp"
         android:text="开眼最近玩什么？"
@@ -19,11 +19,13 @@
         android:id="@+id/vp_child_tab"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_margin="20dp" />
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="30dp"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
         android:layout_margin="20dp"
         android:background="@color/grey" />
 </LinearLayout>

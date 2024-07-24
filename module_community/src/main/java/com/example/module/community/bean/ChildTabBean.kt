@@ -1,5 +1,7 @@
 package com.example.module.community.bean
 
+import java.io.Serializable
+
 /**
  * author : zeq
  * email : 1301731619@qq.com
@@ -11,7 +13,7 @@ data class ChildTabBean(
     val itemList: List<Item>,
     val nextPageUrl: String,
     val total: Int
-)
+) : Serializable
 
 data class Item(
     val adIndex: Int,
@@ -20,7 +22,7 @@ data class Item(
     val tag: Any,
     val trackingData: Any,
     val type: String
-)
+) : Serializable
 
 data class Data(
     val actionUrl: String,
