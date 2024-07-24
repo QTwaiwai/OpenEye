@@ -146,3 +146,12 @@ data class RecTag(
     val newestEndTime: Long,
     val tagRecType: String
 )
+data class Rec(
+    val coverUrl:String,
+    val title:String,
+    val icon:String,
+    val author:String,
+    val picUrls:List<String>?,
+    val type: String,
+    val palyUrl:String?
+)

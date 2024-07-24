@@ -59,7 +59,7 @@ class BannerHelper {
                 val currentItem = mViewPager2.currentItem
                 val nextItem =  if (currentItem == mData.size - 1) 100 else currentItem + 1
                 mViewPager2.setCurrentItem(nextItem, true)
-                handler.postDelayed(this, 3000)
+                handler.postDelayed(this, 5000)
             }
         }
         handler.post(runnable)

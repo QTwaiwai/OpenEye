@@ -59,6 +59,7 @@ class DailyViewModel : ViewModel() {
                 }
 
                 override fun onNext(t: DailyVp2Data) {
+                    Log.d("NET", t.toString())
                     _dailyVp2Data.postValue(t.itemList)
                 }
             })
@@ -106,7 +107,6 @@ class DailyViewModel : ViewModel() {
 
                 override fun onNext(t: DailyRvData) {
                     _isConnect.value=true
-                    Log.d("NET", "onNext: ${t.itemList}")
                     _url.value = t.nextPageUrl
                     _dailyRvData.value = _dailyRvData.value?.plus(t.itemList)
                 }
