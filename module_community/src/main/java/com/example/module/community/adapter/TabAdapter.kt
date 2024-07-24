@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.module.community.ChildTabActivity
+import com.example.module.community.R
 import com.example.module.community.bean.ChildTabBean
 import com.example.module.community.bean.TabListBean
 import com.example.module.community.databinding.ItemCommunityBinding
@@ -73,5 +74,20 @@ class TabAdapter(
         holder.tvName.text = item.name
 
         holder.vpChild.adapter = ChildVpAdapter(childItem.itemList)
+        holder.vpChild.setPageTransformer { page, position ->
+            if (position <= 0.0f) {
+                // 被滑动的那页及之前全部的已被划走的页
+                // Log.d("transformPage [surface]", s_id + " | pos = " + position)
+                page.translationX = 0.0f
+                page.translationZ = 0.0f
+            } else {
+                // 在被滑动页下方的页
+                // Log.d("transformPage [under]", s_id + " | pos = " + position)
+                // 设置每一页相对于【其自身左侧】的偏移
+                page.translationX = (-page.width * position)
+                page.translationZ = -position
+            }
+
+        }
     }
 }

@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_classify_detail"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="250dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_detail"
@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:background="@color/grey"
             android:transitionName="jump"
-            app:contentScrim="@color/purple_200"
+            app:contentScrim="@color/blue_moon"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -53,15 +53,16 @@
                 android:id="@+id/tv_detail_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
                 android:padding="8dp"
-                android:text="description" />
+                android:textColor="@color/blue"
+                android:text="description"
+                android:textSize="18dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_classify_detail"
-                android:padding="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:padding="5dp" />
         </LinearLayout>
     </FrameLayout>
 
@@ -69,9 +70,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="35dp"
-        android:backgroundTint="@color/grey"
+        android:backgroundTint="@color/blue_moon"
         app:layout_anchor="@id/frame_detail"
         app:layout_anchorGravity="bottom|end"
-        app:rippleColor="@color/purple_200" />
+        app:rippleColor="@color/blue" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

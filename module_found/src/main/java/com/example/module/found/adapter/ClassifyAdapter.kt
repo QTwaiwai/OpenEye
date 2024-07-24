@@ -3,8 +3,11 @@ package com.example.module.found.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.module.found.MyImage
 import com.example.module.found.R
 import com.example.module.found.bean.ClassifyBean
 import com.example.module.found.ui.ClassifyDetailActivity
@@ -28,7 +31,8 @@ class ClassifyAdapter(private val classifyList: List<ClassifyBean>) :
                     itemView.context,
                     item.id.toString(),
                     item.description,
-                    classifyName
+                    classifyName,
+                    absoluteAdapterPosition
                 )
             }
         }

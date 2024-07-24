@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -21,13 +22,10 @@ public final class ItemOthersBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final ConstraintLayout itemClVideo;
+  public final CardView cardVideo;
 
   @NonNull
   public final ImageView itemIvCover;
-
-  @NonNull
-  public final ImageView itemIvPlay;
 
   @NonNull
   public final TextView itemTvTime;
@@ -35,15 +33,18 @@ public final class ItemOthersBinding implements ViewBinding {
   @NonNull
   public final TextView itemTvTitle;
 
-  private ItemOthersBinding(@NonNull ConstraintLayout rootView,
-      @NonNull ConstraintLayout itemClVideo, @NonNull ImageView itemIvCover,
-      @NonNull ImageView itemIvPlay, @NonNull TextView itemTvTime, @NonNull TextView itemTvTitle) {
+  @NonNull
+  public final View view;
+
+  private ItemOthersBinding(@NonNull ConstraintLayout rootView, @NonNull CardView cardVideo,
+      @NonNull ImageView itemIvCover, @NonNull TextView itemTvTime, @NonNull TextView itemTvTitle,
+      @NonNull View view) {
     this.rootView = rootView;
-    this.itemClVideo = itemClVideo;
+    this.cardVideo = cardVideo;
     this.itemIvCover = itemIvCover;
-    this.itemIvPlay = itemIvPlay;
     this.itemTvTime = itemTvTime;
     this.itemTvTitle = itemTvTitle;
+    this.view = view;
   }
 
   @Override
@@ -73,21 +74,15 @@ public final class ItemOthersBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.item_cl_video;
-      ConstraintLayout itemClVideo = ViewBindings.findChildViewById(rootView, id);
-      if (itemClVideo == null) {
+      id = R.id.card_video;
+      CardView cardVideo = ViewBindings.findChildViewById(rootView, id);
+      if (cardVideo == null) {
         break missingId;
       }
 
       id = R.id.item_iv_cover;
       ImageView itemIvCover = ViewBindings.findChildViewById(rootView, id);
       if (itemIvCover == null) {
-        break missingId;
-      }
-
-      id = R.id.item_iv_play;
-      ImageView itemIvPlay = ViewBindings.findChildViewById(rootView, id);
-      if (itemIvPlay == null) {
         break missingId;
       }
 
@@ -103,8 +98,14 @@ public final class ItemOthersBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemOthersBinding((ConstraintLayout) rootView, itemClVideo, itemIvCover,
-          itemIvPlay, itemTvTime, itemTvTitle);
+      id = R.id.view;
+      View view = ViewBindings.findChildViewById(rootView, id);
+      if (view == null) {
+        break missingId;
+      }
+
+      return new ItemOthersBinding((ConstraintLayout) rootView, cardVideo, itemIvCover, itemTvTime,
+          itemTvTitle, view);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

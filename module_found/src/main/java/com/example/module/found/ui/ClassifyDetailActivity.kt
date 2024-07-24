@@ -10,7 +10,9 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.lib.base.BaseActivity
+import com.example.module.found.MyImage
 import com.example.module.found.R
 import com.example.module.found.adapter.ClassifyDetailAdapter
 import com.example.module.found.bean.ClassifyDetail
@@ -28,13 +30,15 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
             context: Context,
             id: String,
             desc: String,
-            tvClassify: TextView
+            tvClassify: TextView,
+            position: Int
         ) {
 
             val intent = Intent(context, ClassifyDetailActivity::class.java).apply {
                 putExtra("id", id)
                 putExtra("desc", desc)
                 putExtra("tvClassify", tvClassify.text)
+                putExtra("position", position)
             }
             val options = ActivityOptions.makeSceneTransitionAnimation(
                 context as Activity,
@@ -51,6 +55,10 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         mBinding.collapsingToolbarDetail.title = intent.getStringExtra("tvClassify")
         mBinding.tvDetailDesc.text = intent.getStringExtra("desc")
+
+        Glide.with(this)
+            .load(MyImage.imageArray[intent.getIntExtra("position", 0)])
+            .into(mBinding.imgDetail)
 
         // 初始化 ViewModel
         mViewModel = ViewModelProvider(this)[ClassifyViewModel::class.java]
@@ -70,8 +78,10 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
     }
 
     private fun initRv() {
-        mBinding.rvClassifyDetail.layoutManager = LinearLayoutManager(this)
-        mBinding.rvClassifyDetail.adapter = ClassifyDetailAdapter(classifyDetailList)
+        mBinding.rvClassifyDetail.apply {
+            layoutManager = LinearLayoutManager(this@ClassifyDetailActivity)
+            adapter = ClassifyDetailAdapter(classifyDetailList)
+        }
     }
 
     //按下 Home 按钮的默认图标，返回上一个界面

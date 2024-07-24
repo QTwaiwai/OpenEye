@@ -28,6 +28,9 @@ public final class ActivityVideoBinding implements ViewBinding {
   public final AppBarLayout appbar;
 
   @NonNull
+  public final TextView itemTvTitle;
+
+  @NonNull
   public final ImageView ivLikes;
 
   @NonNull
@@ -64,19 +67,17 @@ public final class ActivityVideoBinding implements ViewBinding {
   public final TextView tvTag;
 
   @NonNull
-  public final TextView tvTitle;
-
-  @NonNull
   public final VideoView video;
 
   private ActivityVideoBinding(@NonNull ConstraintLayout rootView, @NonNull AppBarLayout appbar,
-      @NonNull ImageView ivLikes, @NonNull ImageView ivShare, @NonNull ImageView ivStar,
-      @NonNull ConstraintLayout main, @NonNull RecyclerView rvOthers, @NonNull Toolbar toolbar,
-      @NonNull TextView tvAuthor, @NonNull TextView tvDescription, @NonNull TextView tvLikes,
-      @NonNull TextView tvRelated, @NonNull TextView tvStar, @NonNull TextView tvTag,
-      @NonNull TextView tvTitle, @NonNull VideoView video) {
+      @NonNull TextView itemTvTitle, @NonNull ImageView ivLikes, @NonNull ImageView ivShare,
+      @NonNull ImageView ivStar, @NonNull ConstraintLayout main, @NonNull RecyclerView rvOthers,
+      @NonNull Toolbar toolbar, @NonNull TextView tvAuthor, @NonNull TextView tvDescription,
+      @NonNull TextView tvLikes, @NonNull TextView tvRelated, @NonNull TextView tvStar,
+      @NonNull TextView tvTag, @NonNull VideoView video) {
     this.rootView = rootView;
     this.appbar = appbar;
+    this.itemTvTitle = itemTvTitle;
     this.ivLikes = ivLikes;
     this.ivShare = ivShare;
     this.ivStar = ivStar;
@@ -89,7 +90,6 @@ public final class ActivityVideoBinding implements ViewBinding {
     this.tvRelated = tvRelated;
     this.tvStar = tvStar;
     this.tvTag = tvTag;
-    this.tvTitle = tvTitle;
     this.video = video;
   }
 
@@ -123,6 +123,12 @@ public final class ActivityVideoBinding implements ViewBinding {
       id = R.id.appbar;
       AppBarLayout appbar = ViewBindings.findChildViewById(rootView, id);
       if (appbar == null) {
+        break missingId;
+      }
+
+      id = R.id.item_tv_title;
+      TextView itemTvTitle = ViewBindings.findChildViewById(rootView, id);
+      if (itemTvTitle == null) {
         break missingId;
       }
 
@@ -194,21 +200,15 @@ public final class ActivityVideoBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tv_title;
-      TextView tvTitle = ViewBindings.findChildViewById(rootView, id);
-      if (tvTitle == null) {
-        break missingId;
-      }
-
       id = R.id.video;
       VideoView video = ViewBindings.findChildViewById(rootView, id);
       if (video == null) {
         break missingId;
       }
 
-      return new ActivityVideoBinding((ConstraintLayout) rootView, appbar, ivLikes, ivShare, ivStar,
-          main, rvOthers, toolbar, tvAuthor, tvDescription, tvLikes, tvRelated, tvStar, tvTag,
-          tvTitle, video);
+      return new ActivityVideoBinding((ConstraintLayout) rootView, appbar, itemTvTitle, ivLikes,
+          ivShare, ivStar, main, rvOthers, toolbar, tvAuthor, tvDescription, tvLikes, tvRelated,
+          tvStar, tvTag, video);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -3,75 +3,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#000000">
-
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/item_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:gravity="center"
-        android:text="这是视频标题"
-        android:textSize="18dp"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_cl_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/item_tv_title"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_margin="10dp"
+        android:text="这是视频标题"
+        android:textSize="20dp"
+        android:textColor="#878B8E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_video"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_tv_title">
 
         <ImageView
             android:id="@+id/item_iv_cover"
             android:layout_width="wrap_content"
-            android:layout_height="180dp"
-            android:scaleType="centerCrop"
+            android:layout_height="match_parent"
             android:background="@drawable/notfound"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/play2"
+            android:layout_gravity="center"
             android:alpha="0.75"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/item_iv_cover" />
-        <ImageView
-            android:id="@+id/item_iv_play"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/paly"
-            app:layout_constraintEnd_toStartOf="@id/item_tv_time"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-        <TextView
-            android:id="@+id/item_tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:gravity="center"
-            android:text="00:00"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:src="@drawable/play2" />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="1"
-        android:text="------------------------------------------------------------------------------------------------------------"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/item_cl_video"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:id="@+id/item_tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@drawable/paly"
+        android:text="00:00"
+        android:padding="5dp"
+        android:textColor="#878B8E"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_video"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorUnselected"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
