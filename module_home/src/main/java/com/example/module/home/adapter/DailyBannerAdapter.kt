@@ -1,25 +1,25 @@
 package com.example.module.home.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.lib_net.RetrofitClient
 import com.example.module.home.R
 import com.example.module.home.bean.DvItem
+import com.example.module.home.service.RecommendService
 
 /**
- * description : TODO:类的作用
+ * description : banner的adapter
  * author : QTwawa
  * date : 2024/7/17 16:08
  */
-class DailyBannerAdapter(private val context: Fragment) :
+class DailyBannerAdapter :
     ListAdapter<DvItem, DailyBannerAdapter.DailyBannerViewHolder>(object :
         DiffUtil.ItemCallback<DvItem>() {
         override fun areItemsTheSame(oldItem: DvItem, newItem: DvItem): Boolean {
@@ -62,5 +62,5 @@ inner class DailyBannerViewHolder(itemView: View) : RecyclerView.ViewHolder(item
             .into(ivDailyCover)
         tvDailyTitle.text = data.data.title
     }
-}
+  }
 }

@@ -1,7 +1,6 @@
 package com.example.module.home.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,11 +26,10 @@ class RecommendFragment : Fragment() {
     }
     private lateinit var mAdapter: RecommendAdapter
     private var url: String = ""
-    private var count: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return mBinding.root
     }
 
@@ -52,45 +50,20 @@ class RecommendFragment : Fragment() {
                 element.type != "horizontalScrollCard"
             }
             mAdapter.submitList(list)
-            count += list.size
         }
         mRecommendViewModel.url.observe(viewLifecycleOwner) {
             url = it.replace("http", "https")
         }
     }
-
+    //滑动逻辑
     private fun onScroll() {
         mBinding.rvHomeRecommend.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as StaggeredGridLayoutManager?
-                val adapter = recyclerView.adapter
-                if (layoutManager != null && adapter != null) {
-                    // 获取最后一个可见item的位置
-                    val lastVisibleItemPositions =
-                        layoutManager.findLastVisibleItemPositions(null)
-                    val lastVisibleItemPosition: Int =
-                        getLastVisibleItem(lastVisibleItemPositions)
-                    // 获取可见item的数量
-                    val visibleItemCount = recyclerView.childCount
-                    // 获取Adapter的item总数
-                    val totalItemCount = adapter.itemCount
-                    // 判断是否到达最后一个元素
-                    if (lastVisibleItemPosition + visibleItemCount >= totalItemCount) {
-                        mRecommendViewModel.getNextRecommend(url)
-                    }
+                if(!recyclerView.canScrollVertically(1)){
+                    mRecommendViewModel.getNextRecommend(url)
                 }
             }
         })
-    }
-
-    private fun getLastVisibleItem(lastVisibleItemPositions: IntArray): Int {
-        var maxSize = 0
-        for (position in lastVisibleItemPositions) {
-            if (position > maxSize) {
-                maxSize = position
-            }
-        }
-        return maxSize
     }
 }

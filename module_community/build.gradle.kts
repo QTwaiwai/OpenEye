@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.android.application)
+    //    alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    //id("com.android.library")
+    id("com.android.library")
     id("kotlin-kapt")
 }
 
@@ -11,11 +11,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
-       applicationId = "com.example.module.community"
+//       applicationId = "com.example.module.community"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+//        versionCode = 1
+//        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,7 +39,6 @@ android {
         jvmTarget = "1.8"
     }
 }
-
 kapt {
     arguments {
         arg("AROUTER_MODULE_NAME", project.name)
@@ -62,10 +61,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")
-
     implementation ("com.alibaba:arouter-api:1.5.2")
     kapt  ("com.alibaba:arouter-compiler:1.5.2")
-
     implementation(project(":lib_base"))
     implementation(project(":lib_net"))
 
