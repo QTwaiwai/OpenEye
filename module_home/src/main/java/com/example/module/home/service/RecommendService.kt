@@ -3,6 +3,7 @@ package com.example.module.home.service
 import com.example.module.home.bean.RecommendData
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
+import retrofit2.http.Query
 import retrofit2.http.Url
 
 /**
@@ -12,8 +13,9 @@ import retrofit2.http.Url
  */
 interface RecommendService {
     @GET("api/v7/community/tab/rec")
-    fun getRecommend(): Observable<RecommendData>
+    suspend fun getRecommend(
+        @Query("startScore") page:String,
+        @Query("pageCount") isTag:String,
+    ): RecommendData
 
-    @GET
-    fun getNextRecommend(@Url url: String): Observable<RecommendData>
 }

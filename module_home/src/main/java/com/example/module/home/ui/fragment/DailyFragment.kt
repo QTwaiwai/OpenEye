@@ -1,8 +1,7 @@
-package com.example.module.home.ui
+package com.example.module.home.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -12,11 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.module.home.ViewModel.DailyViewModel
 import com.example.module.home.adapter.DailyRvAdapter
 import com.example.module.home.databinding.FgHomeDailyBinding
 import com.example.module.home.helper.BannerHelper
+import com.example.module_video.ui.PhotoGraphActivity
 
 /**
  * description : RecommendViewModel
@@ -66,12 +65,12 @@ class DailyFragment : Fragment() {
     private fun initRvView() {
         mDailyViewModel.dailyRvData.observe(viewLifecycleOwner) {
             val list = it.filter { element ->
-                element.type != "textCard"
+                element.type == "videoSmallCard"
             }
             mRvAdapter.submitList(list)
         }
         mDailyViewModel.url.observe(viewLifecycleOwner) {
-            url = it.replace("http", "https")
+            url = it
         }
         mBinding.rvHomeDaily.apply {
             adapter = mRvAdapter

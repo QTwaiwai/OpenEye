@@ -14,7 +14,7 @@
             android:name=".ui.ClassifyDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.FoundActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 

@@ -96,15 +96,15 @@ class DailyRvAdapter(private val context: Fragment) :
         @SuppressLint("SetTextI18n")
         fun bind(data: DrItem) {
             Glide.with(itemView.context)
-                .load(data.data.content.data.cover.detail.replace("http", "https"))
+                .load(data.data.cover.detail)
                 .into(ivDailyCover)
             Glide.with(itemView.context)
-                .load(data.data.content.data.author.icon.replace("http", "https")).circleCrop()
+                .load(data.data.author.icon).circleCrop()
                 .into(ivDailyIcon)
-            tvDailyTitle.text = data.data.content.data.title
-            tvDailyAuthor.text = data.data.content.data.author.name
-            tvDailyTag.text = "#" + data.data.content.data.category
-            val long = data.data.content.data.duration.toLong()
+            tvDailyTitle.text = data.data.title
+            tvDailyAuthor.text = data.data.author.name
+            tvDailyTag.text = "#" + data.data.category
+            val long = data.data.duration.toLong()
             val minuter = (long / 60).toInt()
             val second = (long % 60).toInt()
             var time: String = if (minuter < 10) "0$minuter" else minuter.toString()
@@ -114,15 +114,15 @@ class DailyRvAdapter(private val context: Fragment) :
             //设计点击事件
             ivDailyCover.setOnClickListener {
                 ARouter.getInstance().build("/video/VideoActivity")
-                    .withString("title",data.data.content.data.title)
-                    .withString("author",data.data.content.data.author.name)
-                    .withString("description",data.data.content.data.description)
-                    .withInt("likes",data.data.content.data.consumption.collectionCount)
-                    .withString("tag",data.data.content.data.category)
-                    .withInt("share",data.data.content.data.consumption.shareCount)
-                    .withInt("star",data.data.content.data.consumption.realCollectionCount)
-                    .withString("url",data.data.content.data.playUrl.replace("http", "https"))
-                    .withInt("id",data.data.content.data.id)
+                    .withString("title",data.data.title)
+                    .withString("author",data.data.author.name)
+                    .withString("description",data.data.description)
+                    .withInt("likes",data.data.consumption.collectionCount)
+                    .withString("tag",data.data.category)
+                    .withInt("share",data.data.consumption.shareCount)
+                    .withInt("star",data.data.consumption.realCollectionCount)
+                    .withString("url",data.data.playUrl)
+                    .withInt("id",data.data.id)
                     .navigation(context.activity?.application?.applicationContext)
             }
         }
