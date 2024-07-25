@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.module.found.bean.SpecialDetailBean
 import com.example.module.found.databinding.ItemSpecialPreviewBinding
-import com.example.module.found.ui.SpecialDetailActivity
+import com.example.module.found.ui.activity.SpecialDetailActivity
 
 /**
  * author : zeq

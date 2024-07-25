@@ -1,23 +1,17 @@
 package com.example.module.found.adapter
 
 import android.app.Activity
-import android.app.ActivityOptions
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat.postponeEnterTransition
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.lib.base.timeConversion
-import com.example.module.found.MyImage
-import com.example.module.found.R
 import com.example.module.found.bean.ClassifyDetail
 import com.example.module.found.databinding.ItemClassifyDetailBinding
-import com.example.module.found.ui.SpecialDetailActivity
 
 /**
  * author : zeq
@@ -58,9 +52,7 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
                     .withInt("star", data.data.content.data.consumption.realCollectionCount)
                     .withString("url", data.data.content.data.playUrl.replace("http", "https"))
                     .withInt("id", data.data.content.data.id)
-                    .withTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     .navigation(itemView.context as Activity)
-
 
             }
         }

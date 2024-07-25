@@ -57,10 +57,11 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
     private fun getChildData(id: String) {
         //请求ChildTab的数据
         lifecycleScope.launch {
+
             vmTab.getChildTabData(id)
 
 
-            vmTab.childTabStateFlow.collect {
+            vmTab.childTabStateFlow.collectLatest {
                 if (it != null) {
                     childAdapter.submitList(it)
                 }

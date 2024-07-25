@@ -2,7 +2,6 @@ package com.example.module.found.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import com.example.module.found.adapter.SpecialPreviewAdapter
 import com.example.module.found.bean.ClassifyBean
 import com.example.module.found.bean.SpecialDetailBean
 import com.example.module.found.databinding.FragmentFoundBinding
-import com.example.module.found.ui.SpecialAllActivity
+import com.example.module.found.ui.activity.SpecialAllActivity
 import com.example.module.found.viewmodel.ClassifyViewModel
 import com.example.module.found.viewmodel.SpecialViewModel
 import kotlinx.coroutines.flow.collectLatest

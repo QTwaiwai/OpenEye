@@ -48,7 +48,7 @@ class TabViewModel : ViewModel() {
         get() = _url
 
     fun getChildTabData(id: String) {
-        viewModelScope.launch {
+        viewModelScope.launch{
             try {
                 val response: ChildTabBean = if (id == "0") {
                     CommunityNet.childTabService.getChildTab(id, "true", "", "")
@@ -58,7 +58,8 @@ class TabViewModel : ViewModel() {
                 }
                 _url.value = response.nextPageUrl
                 Log.d("zeq", "getChildTabData: ${response.itemList}")
-                _mutableChildTabStateFlow.emit(response.itemList)
+                _mutableChildTabStateFlow.value = response.itemList
+                //_mutableChildTabStateFlow.emit(response.itemList)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

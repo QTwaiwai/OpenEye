@@ -5,13 +5,13 @@
 
     <application>
         <activity
-            android:name=".ui.SpecialDetailActivity"
+            android:name=".ui.activity.SpecialDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.SpecialAllActivity"
+            android:name=".ui.activity.SpecialAllActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ClassifyDetailActivity"
+            android:name=".ui.activity.ClassifyDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

@@ -1,6 +1,7 @@
 package com.example.module.community
 
 import android.util.Log
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
 
 
     private fun getChildBean() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             vmChild.getChildTabData()
 
             vmChild.childTabStateFlow.collect {

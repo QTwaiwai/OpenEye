@@ -1,4 +1,4 @@
-package com.example.module.found.ui
+package com.example.module.found.ui.activity
 
 import android.app.Activity
 import android.app.ActivityOptions
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.lib.base.BaseActivity
 import com.example.module.found.MyImage
-import com.example.module.found.R
 import com.example.module.found.adapter.ClassifyDetailAdapter
 import com.example.module.found.bean.ClassifyDetail
 import com.example.module.found.databinding.ActivityClassifyDetailBinding
@@ -74,6 +73,11 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
                     initRv()
                 }
             }
+        }
+
+        //返回顶部
+        mBinding.btnFloat.setOnClickListener {
+            mBinding.rvClassifyDetail.smoothScrollToPosition(0)
         }
     }
 

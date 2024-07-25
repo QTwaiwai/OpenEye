@@ -1,19 +1,14 @@
-package com.example.module.found.ui
+package com.example.module.found.ui.activity
 
 import android.util.Log
-import android.view.MenuItem
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lib.base.BaseActivity
 import com.example.module.found.adapter.SpecialAllAdapter
-import com.example.module.found.bean.SpecialDetailBean
 import com.example.module.found.databinding.ActivitySpecialAllBinding
 import com.example.module.found.viewmodel.SpecialAllViewModel
-import com.example.module.found.viewmodel.SpecialViewModel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class SpecialAllActivity : BaseActivity<ActivitySpecialAllBinding>() {
