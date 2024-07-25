@@ -1,6 +1,7 @@
 package com.example.module.community
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
     private lateinit var vmTab: TabViewModel
     private lateinit var vmChild: ChildTabViewModel
-    private var  childTab = mutableListOf<ChildTabBean>()
+    private var childTab = mutableListOf<ChildTabBean>()
 
 
     private fun getChildBean() {
@@ -52,6 +53,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
                 if (it != null) {
                     Log.d("Zeq666", "getTabData: $it")
                     mbinding.rvCommunityTab.adapter = TabAdapter(it, childTab)
+                    mbinding.tvCommunityEnd.visibility = View.VISIBLE
                 }
             }
         }

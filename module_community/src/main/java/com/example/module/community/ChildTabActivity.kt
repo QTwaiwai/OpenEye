@@ -52,6 +52,10 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
         getChildData(id)
         initListener(id)
 
+        //返回顶部
+        mBinding.btnCommunityFloat.setOnClickListener {
+            mBinding.rvChildTab.smoothScrollToPosition(0)
+        }
     }
 
     private fun getChildData(id: String) {

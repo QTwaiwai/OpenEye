@@ -77,13 +77,11 @@ class TabAdapter(
         holder.vpChild.setPageTransformer { page, position ->
             if (position <= 0.0f) {
                 // 被滑动的那页及之前全部的已被划走的页
-                // Log.d("transformPage [surface]", s_id + " | pos = " + position)
                 page.translationX = 0.0f
                 page.translationZ = 0.0f
             } else {
                 // 在被滑动页下方的页
-                // Log.d("transformPage [under]", s_id + " | pos = " + position)
-                // 设置每一页相对于【其自身左侧】的偏移
+                // 设置每一页相对于其自身左侧的偏移
                 page.translationX = (-page.width * position)
                 page.translationZ = -position
             }

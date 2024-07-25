@@ -54,8 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:textColor="@color/blue"
                 android:text="description"
+                android:textColor="@color/blue"
                 android:textSize="18dp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -72,6 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="35dp"
         android:backgroundTint="@color/blue_moon"
+        android:src="@drawable/img_up"
         app:layout_anchor="@id/frame_detail"
         app:layout_anchorGravity="bottom|end"
         app:rippleColor="@color/blue" />

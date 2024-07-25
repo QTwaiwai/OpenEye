@@ -18,7 +18,7 @@
         app:tabIndicatorHeight="3dp"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/green"
-        app:tabTextColor="@color/green" />
+        app:tabTextColor="@color/green_dan" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp2_hot"
