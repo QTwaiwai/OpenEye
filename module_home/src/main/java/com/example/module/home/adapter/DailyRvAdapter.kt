@@ -1,6 +1,8 @@
 package com.example.module.home.adapter
 
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +18,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.example.module.home.R
+import com.example.module.home.bean.DrData
 import com.example.module.home.bean.DrItem
+import com.example.module.home.bean.DvData
 import com.example.module.home.bean.DvItem
+import com.example.module.home.bean.Rec
+import com.example.module_video.ui.VideoActivity
 
 
 /**
@@ -25,14 +32,14 @@ import com.example.module.home.bean.DvItem
  * date : 2024/7/17 16:08
  */
 class DailyRvAdapter(private val context: Fragment) :
-    ListAdapter<DrItem, RecyclerView.ViewHolder>(object :
-        DiffUtil.ItemCallback<DrItem>() {
-        override fun areItemsTheSame(oldItem: DrItem, newItem: DrItem): Boolean {
+    PagingDataAdapter<DrData, RecyclerView.ViewHolder>(object :
+        DiffUtil.ItemCallback<DrData>() {
+        override fun areItemsTheSame(oldItem: DrData, newItem: DrData): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: DrItem, newItem: DrItem): Boolean {
-            return oldItem.data == newItem.data
+        override fun areContentsTheSame(oldItem: DrData, newItem: DrData): Boolean {
+            return oldItem.title == newItem.title
         }
     }) {
     lateinit var bannerList: List<DvItem>
@@ -44,9 +51,7 @@ class DailyRvAdapter(private val context: Fragment) :
         mInitBanner = ir
     }
 
-    override fun getItemCount(): Int {
-        return currentList.size
-    }
+
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
@@ -76,10 +81,18 @@ class DailyRvAdapter(private val context: Fragment) :
             is BannerViewHolder->{
             }
             is DailyRvViewHolder->{
-                holder.bind(getItem(position))
+                holder.bind(getItem(position)!!)
             }
         }
 
+    }
+    fun interface OnClickedListener {
+        fun onClicked(dailyData : DrData, view: View)
+    }
+
+    private var listener: OnClickedListener? = null
+    fun setOnClickedListener(listener: OnClickedListener) {
+        this.listener = listener
     }
     fun submitBannerList(bannerNewsList: List<DvItem>) {
         this.bannerList = bannerNewsList
@@ -94,17 +107,17 @@ class DailyRvAdapter(private val context: Fragment) :
         private val tvDailyTag: TextView = itemView.findViewById(R.id.item_tv_home_daily_tag)
 
         @SuppressLint("SetTextI18n")
-        fun bind(data: DrItem) {
+        fun bind(data: DrData) {
             Glide.with(itemView.context)
-                .load(data.data.cover.detail)
+                .load(data.cover.detail)
                 .into(ivDailyCover)
             Glide.with(itemView.context)
-                .load(data.data.author.icon).circleCrop()
+                .load(data.author.icon).circleCrop()
                 .into(ivDailyIcon)
-            tvDailyTitle.text = data.data.title
-            tvDailyAuthor.text = data.data.author.name
-            tvDailyTag.text = "#" + data.data.category
-            val long = data.data.duration.toLong()
+            tvDailyTitle.text = data.title
+            tvDailyAuthor.text = data.author.name
+            tvDailyTag.text = "#" + data.category
+            val long = data.duration.toLong()
             val minuter = (long / 60).toInt()
             val second = (long % 60).toInt()
             var time: String = if (minuter < 10) "0$minuter" else minuter.toString()
@@ -113,17 +126,17 @@ class DailyRvAdapter(private val context: Fragment) :
             tvDailyTime.text = time
             //设计点击事件
             ivDailyCover.setOnClickListener {
-                ARouter.getInstance().build("/video/VideoActivity")
-                    .withString("title",data.data.title)
-                    .withString("author",data.data.author.name)
-                    .withString("description",data.data.description)
-                    .withInt("likes",data.data.consumption.collectionCount)
-                    .withString("tag",data.data.category)
-                    .withInt("share",data.data.consumption.shareCount)
-                    .withInt("star",data.data.consumption.realCollectionCount)
-                    .withString("url",data.data.playUrl)
-                    .withInt("id",data.data.id)
-                    .navigation(context.activity?.application?.applicationContext)
+//                ARouter.getInstance().build("/video/VideoActivity")
+//                    .withString("title",data.data.title)
+//                    .withString("author",data.data.author.name)
+//                    .withString("description",data.data.description)
+//                    .withInt("likes",data.data.consumption.collectionCount)
+//                    .withString("tag",data.data.category)
+//                    .withInt("share",data.data.consumption.shareCount)
+//                    .withString("url",data.data.playUrl)
+//                    .withInt("id",data.data.id)
+//                    .navigation(context.activity?.application?.applicationContext)
+                listener?.onClicked(getItem(absoluteAdapterPosition)!!,ivDailyCover)
             }
         }
     }

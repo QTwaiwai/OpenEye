@@ -15,23 +15,30 @@ class MyRecyclerView @JvmOverloads constructor(
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
     var isScrollEnabled = false
+    private var setX:Float=0F
+    private var setY:Float=0F
 
 
-    override fun dispatchTouchEvent(e: MotionEvent?): Boolean {
-
-        if (e != null) {
-            when (e.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    parent.requestDisallowInterceptTouchEvent(true)//让父布局不拦截事件，传到Rv来
+    override fun dispatchTouchEvent(e: MotionEvent): Boolean {
+        val x=e.x
+        val y=e.y
+        when (e.action) {
+            MotionEvent.ACTION_DOWN -> {
+                parent.requestDisallowInterceptTouchEvent(true)//让父布局不拦截事件，传到Rv来
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (isScrollEnabled) {
+                    parent.requestDisallowInterceptTouchEvent(false)
                 }
-
-                MotionEvent.ACTION_MOVE -> {
-                    if (isScrollEnabled) {
-                        parent.requestDisallowInterceptTouchEvent(false)
-                    }
+                val gapX = x - setX;
+                val gapY = y - setY;
+                if(gapX>gapY){
+                    parent.requestDisallowInterceptTouchEvent(false)
                 }
             }
         }
+        setX=x
+        setY=y
         return super.dispatchTouchEvent(e)
     }
 }

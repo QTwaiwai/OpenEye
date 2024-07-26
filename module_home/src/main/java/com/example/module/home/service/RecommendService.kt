@@ -9,7 +9,7 @@ import retrofit2.http.Url
 /**
  * description : RecommendService
  * author : QTwawa
- * date : 2024/7/16 15:43
+ * date : 2024/7/24 15:43
  */
 interface RecommendService {
     @GET("api/v7/community/tab/rec")
