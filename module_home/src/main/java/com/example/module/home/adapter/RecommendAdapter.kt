@@ -48,9 +48,7 @@ class RecommendAdapter(private val context: Fragment) :
 
     override fun onBindViewHolder(holder: RecommendViewHolder, position: Int) {
         val recommendData = getItem(position)
-        if (recommendData != null) {
-            holder.bind(recommendData)
-        }
+        holder.bind(recommendData!!)
     }
     fun interface OnClickedListener {
         fun onClicked(recommendData : Rec,view: View)

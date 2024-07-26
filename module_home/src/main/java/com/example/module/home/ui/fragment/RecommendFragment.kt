@@ -71,13 +71,13 @@ class RecommendFragment : Fragment() {
                 ActivityOptions.makeSceneTransitionAnimation(
                     requireActivity(),
                     view,
-                    "picture"
+                    "sharedImage"
                 ).toBundle()
             )
         }
-        mRecommendViewModel.url.observe(viewLifecycleOwner) {
-            url = it.replace("http", "https")
-        }
+//        mRecommendViewModel.url.observe(viewLifecycleOwner) {
+//            url = it.replace("http", "https")
+//        }
     }
     //滑动逻辑
 //    private fun onScroll() {
