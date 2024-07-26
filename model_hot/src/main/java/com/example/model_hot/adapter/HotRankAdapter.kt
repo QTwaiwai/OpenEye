@@ -53,7 +53,6 @@ class HotRankAdapter :
         private fun initListener() {
             imgVideo.setOnClickListener {
                 val data = getItem(bindingAdapterPosition)
-
                 val intent: Intent = Intent(itemView.context, VideoActivity::class.java).apply {
                     putExtra("title", data.data.title)
                     putExtra("author", data.data.author.name)
@@ -76,7 +75,11 @@ class HotRankAdapter :
             }
 
             imgShare.setOnClickListener {
-
+                val data = getItem(bindingAdapterPosition)
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/plain"
+                intent.putExtra(Intent.EXTRA_TEXT, "我在开眼发现一个很棒的视频，快来看看吧！\n${data.data.playUrl.replace("http", "https")}")
+                itemView.context.startActivity(Intent.createChooser(intent, "分享到"))
             }
         }
     }
@@ -95,9 +98,9 @@ class HotRankAdapter :
         holder.tvAuthor.text = item.data.author.name
         holder.tvTime.text = item.data.duration.timeConversion()
         holder.tvTag.text = buildString {
-                append("#")
-                append(item.data.category)
-            }
+            append("#")
+            append(item.data.category)
+        }
 
         val imgIconUrl = item.data.author.icon.replace("http://", "https://")
         Glide.with(holder.itemView)

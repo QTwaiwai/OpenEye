@@ -1,5 +1,8 @@
 package com.example.module.found.adapter
 
+import android.app.Activity
+import android.app.ActivityOptions
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.lib.base.timeConversion
 import com.example.module.found.bean.SpecialDetailBean
 import com.example.module.found.databinding.ItemSpecialDetialBinding
+import com.example.module_video.ui.VideoActivity
 
 /**
  * author : zeq
@@ -33,19 +37,27 @@ class SpecialDetailAdapter(private val specialDetailBean: SpecialDetailBean) :
 
         private fun initListener() {
             itemView.setOnClickListener {
+
                 val data = specialDetailBean.itemList[bindingAdapterPosition]
 
-                ARouter.getInstance().build("/video/VideoActivity")
-                    .withString("title",data.data.content.data.title)
-                    .withString("author",data.data.content.data.author.name)
-                    .withString("description",data.data.content.data.description)
-                    .withInt("likes",data.data.content.data.consumption.collectionCount)
-                    .withString("tag",data.data.content.data.category)
-                    .withInt("share",data.data.content.data.consumption.shareCount)
-                    .withInt("star",data.data.content.data.consumption.realCollectionCount)
-                    .withString("url",data.data.content.data.playUrl.replace("http", "https"))
-                    .withInt("id",data.data.content.data.id)
-                    .navigation()
+                val intent: Intent = Intent(itemView.context, VideoActivity::class.java).apply {
+                    putExtra("title", data.data.content.data.title)
+                    putExtra("author", data.data.content.data.author.name)
+                    putExtra("description", data.data.content.data.description)
+                    putExtra("likes", data.data.content.data.consumption.collectionCount)
+                    putExtra("tag", data.data.content.data.category)
+                    putExtra("share", data.data.content.data.consumption.shareCount)
+                    putExtra("star", data.data.content.data.consumption.realCollectionCount)
+                    putExtra("url", data.data.content.data.playUrl.replace("http", "https"))
+                    putExtra("id", data.data.content.data.id)
+                }
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    itemView.context as Activity,
+                    imgVideo,
+                    imgVideo.transitionName
+                )
+
+                itemView.context.startActivity(intent, options.toBundle())
             }
         }
     }
