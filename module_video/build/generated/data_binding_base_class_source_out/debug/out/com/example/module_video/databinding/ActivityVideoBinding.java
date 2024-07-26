@@ -5,16 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.module_video.R;
-import com.google.android.material.appbar.AppBarLayout;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -22,10 +21,7 @@ import xyz.doikki.videoplayer.player.VideoView;
 
 public final class ActivityVideoBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
-
-  @NonNull
-  public final AppBarLayout appbar;
+  private final LinearLayout rootView;
 
   @NonNull
   public final TextView itemTvTitle;
@@ -40,7 +36,7 @@ public final class ActivityVideoBinding implements ViewBinding {
   public final ImageView ivStar;
 
   @NonNull
-  public final ConstraintLayout main;
+  public final LinearLayout main;
 
   @NonNull
   public final RecyclerView rvOthers;
@@ -69,14 +65,13 @@ public final class ActivityVideoBinding implements ViewBinding {
   @NonNull
   public final VideoView video;
 
-  private ActivityVideoBinding(@NonNull ConstraintLayout rootView, @NonNull AppBarLayout appbar,
-      @NonNull TextView itemTvTitle, @NonNull ImageView ivLikes, @NonNull ImageView ivShare,
-      @NonNull ImageView ivStar, @NonNull ConstraintLayout main, @NonNull RecyclerView rvOthers,
-      @NonNull Toolbar toolbar, @NonNull TextView tvAuthor, @NonNull TextView tvDescription,
-      @NonNull TextView tvLikes, @NonNull TextView tvRelated, @NonNull TextView tvStar,
-      @NonNull TextView tvTag, @NonNull VideoView video) {
+  private ActivityVideoBinding(@NonNull LinearLayout rootView, @NonNull TextView itemTvTitle,
+      @NonNull ImageView ivLikes, @NonNull ImageView ivShare, @NonNull ImageView ivStar,
+      @NonNull LinearLayout main, @NonNull RecyclerView rvOthers, @NonNull Toolbar toolbar,
+      @NonNull TextView tvAuthor, @NonNull TextView tvDescription, @NonNull TextView tvLikes,
+      @NonNull TextView tvRelated, @NonNull TextView tvStar, @NonNull TextView tvTag,
+      @NonNull VideoView video) {
     this.rootView = rootView;
-    this.appbar = appbar;
     this.itemTvTitle = itemTvTitle;
     this.ivLikes = ivLikes;
     this.ivShare = ivShare;
@@ -95,7 +90,7 @@ public final class ActivityVideoBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public LinearLayout getRoot() {
     return rootView;
   }
 
@@ -120,12 +115,6 @@ public final class ActivityVideoBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.appbar;
-      AppBarLayout appbar = ViewBindings.findChildViewById(rootView, id);
-      if (appbar == null) {
-        break missingId;
-      }
-
       id = R.id.item_tv_title;
       TextView itemTvTitle = ViewBindings.findChildViewById(rootView, id);
       if (itemTvTitle == null) {
@@ -150,7 +139,7 @@ public final class ActivityVideoBinding implements ViewBinding {
         break missingId;
       }
 
-      ConstraintLayout main = (ConstraintLayout) rootView;
+      LinearLayout main = (LinearLayout) rootView;
 
       id = R.id.rv_others;
       RecyclerView rvOthers = ViewBindings.findChildViewById(rootView, id);
@@ -206,9 +195,9 @@ public final class ActivityVideoBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityVideoBinding((ConstraintLayout) rootView, appbar, itemTvTitle, ivLikes,
-          ivShare, ivStar, main, rvOthers, toolbar, tvAuthor, tvDescription, tvLikes, tvRelated,
-          tvStar, tvTag, video);
+      return new ActivityVideoBinding((LinearLayout) rootView, itemTvTitle, ivLikes, ivShare,
+          ivStar, main, rvOthers, toolbar, tvAuthor, tvDescription, tvLikes, tvRelated, tvStar,
+          tvTag, video);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -13,14 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.module.home.ViewModel.DailyViewModel
 import com.example.module.home.adapter.DailyRvAdapter
 import com.example.module.home.bean.DrData
-import com.example.module.home.bean.DrItem
 import com.example.module.home.databinding.FgHomeDailyBinding
 import com.example.module.home.helper.BannerHelper
-import com.example.module_video.ui.PhotoGraphActivity
 import com.example.module_video.ui.VideoActivity
 import kotlinx.coroutines.launch
 
@@ -31,14 +28,13 @@ import kotlinx.coroutines.launch
  */
 
 class DailyFragment : Fragment() {
-    private val mBinding: FgHomeDailyBinding by lazy {
-        FgHomeDailyBinding.inflate(layoutInflater)
-    }
+    private var _binding: FgHomeDailyBinding? = null
+    private val binding get() = _binding!!
     private val mDailyViewModel: DailyViewModel by lazy {
         ViewModelProvider(this)[DailyViewModel::class.java]
     }
     private val mRvAdapter: DailyRvAdapter by lazy {
-        DailyRvAdapter(this)
+        DailyRvAdapter()
     }
     private val bannerHelper by lazy {
         BannerHelper()
@@ -49,7 +45,8 @@ class DailyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return mBinding.root
+        _binding = FgHomeDailyBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,6 +62,7 @@ class DailyFragment : Fragment() {
             mRvAdapter.onInitBanner { adapter ->
                 adapter.submitBannerList(list)
                 bannerHelper.initBanner(adapter)
+                bannerHelper.startRun()
             }
         }
     }
@@ -84,7 +82,7 @@ class DailyFragment : Fragment() {
         mDailyViewModel.url.observe(viewLifecycleOwner) {
             mUrl = it
         }
-        mBinding.rvHomeDaily.apply {
+        binding.rvHomeDaily.apply {
             adapter = mRvAdapter
             layoutManager = LinearLayoutManager(context)
         }
@@ -104,12 +102,12 @@ class DailyFragment : Fragment() {
             startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(requireActivity(),view,"sharedImage").toBundle())
         }
         //刷新再次请求数据
-        mBinding.srlHomeDaily.setOnRefreshListener {
-            mBinding.srlHomeDaily.postDelayed({
+        binding.srlHomeDaily.setOnRefreshListener {
+            binding.srlHomeDaily.postDelayed({
                 mDailyViewModel.getDailyVpData()
 //                mDailyViewModel.getDailyRvData()
                 mRvAdapter.retry()
-                mBinding.srlHomeDaily.isRefreshing = false
+                binding.srlHomeDaily.isRefreshing = false
             },2000)
         }
         //没有网的时候就报
@@ -134,14 +132,21 @@ class DailyFragment : Fragment() {
         //判断是否阻拦横向滑动
         val recyclerViewTouchListener = View.OnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_MOVE||event.action == MotionEvent.ACTION_DOWN) {
-                val childView = mBinding.rvHomeDaily.findChildViewUnder(event.x, event.y)
+                val childView = binding.rvHomeDaily.findChildViewUnder(event.x, event.y)
                 if (childView != null) {
-                    val position = mBinding.rvHomeDaily.getChildAdapterPosition(childView)
-                    mBinding.rvHomeDaily.isScrollEnabled = position > 2
+                    val position = binding.rvHomeDaily.getChildAdapterPosition(childView)
+                    binding.rvHomeDaily.isScrollEnabled = position > 1
                 }
             }
             false
         }
-        mBinding.rvHomeDaily.setOnTouchListener(recyclerViewTouchListener)
+        binding.rvHomeDaily.setOnTouchListener(recyclerViewTouchListener)
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        bannerHelper.destroy()
+        _binding = null
     }
 }

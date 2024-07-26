@@ -37,6 +37,7 @@ class PhotoGraphActivity : AppCompatActivity() {
     private val mBinding: ActivityPhotoGraphBinding by lazy {
         ActivityPhotoGraphBinding.inflate(layoutInflater)
     }
+    private lateinit var mAdapter: PhotoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +49,13 @@ class PhotoGraphActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        val source = intent.getSerializableExtra("source")!! as Source
+        mAdapter= PhotoAdapter(source.picUrls!!)
         mBinding.vp2Photo.apply {
-            val source = intent.getSerializableExtra("source")!! as Source
-            adapter = PhotoAdapter(source.picUrls!!)
-
+            adapter =mAdapter
+        }
+        mAdapter.setOnClickedListener{
+            finish()
         }
     }
 }

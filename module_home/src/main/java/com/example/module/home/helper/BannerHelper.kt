@@ -19,6 +19,19 @@ class BannerHelper {
     private val viewPager2Adapter: DailyBannerAdapter by lazy { DailyBannerAdapter() }
     private lateinit var rvAdapter: DailyRvAdapter
     private var isDown:Boolean=false
+    private val handler = Handler(Looper.getMainLooper())
+    private val runnable = object : Runnable {
+        override fun run() {
+            if (isDown){
+                return
+            }
+            val currentItem = mViewPager2.currentItem
+            val nextItem =  if (currentItem == mData.size - 1) 100 else currentItem + 1
+            mViewPager2.setCurrentItem(nextItem, true)
+            handler.postDelayed(this, 5000)
+        }
+    }
+
 
     fun initBanner(rv:DailyRvAdapter) {
         rvAdapter = rv
@@ -30,26 +43,14 @@ class BannerHelper {
         mViewPager2.adapter = viewPager2Adapter
         mViewPager2.offscreenPageLimit=3
         mViewPager2.setPageTransformer(BannerTransformer())
-        //开始轮播
-        startRun()
-        //触摸事件
-
     }
 
-    private fun startRun() {
-        val handler = Handler(Looper.getMainLooper())
-        val runnable = object : Runnable {
-            override fun run() {
-                if (isDown){
-                    return
-                }
-                val currentItem = mViewPager2.currentItem
-                val nextItem =  if (currentItem == mData.size - 1) 100 else currentItem + 1
-                mViewPager2.setCurrentItem(nextItem, true)
-                handler.postDelayed(this, 5000)
-            }
-        }
-        handler.post(runnable)
+    fun startRun() {
+        handler.postDelayed(runnable, 3000)
+    }
+
+    fun destroy() {
+       handler.removeCallbacksAndMessages(null)
     }
 }
 

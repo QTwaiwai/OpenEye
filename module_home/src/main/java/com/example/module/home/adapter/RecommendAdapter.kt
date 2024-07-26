@@ -1,34 +1,24 @@
 package com.example.module.home.adapter
 
-import android.content.Intent
-import android.graphics.Bitmap
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.Fragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.transition.Transition
 import com.example.module.home.R
 import com.example.module.home.bean.Rec
-import com.example.module.home.bean.RecommendData
-import com.example.module_video.ui.PhotoGraphActivity
 
 /**
  * description : RecommendAdapter
  * author : QTwawa
  * date : 2024/7/16 15:40
  */
-class RecommendAdapter(private val context: Fragment) :
+class RecommendAdapter :
     PagingDataAdapter<Rec, RecommendAdapter.RecommendViewHolder>(object :
         DiffUtil.ItemCallback<Rec>() {
         override fun areItemsTheSame(oldItem: Rec, newItem: Rec): Boolean {

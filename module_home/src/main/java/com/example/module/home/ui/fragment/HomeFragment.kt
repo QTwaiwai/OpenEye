@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.module.home.adapter.HomeAdapter
+import com.example.module.home.databinding.ActivityHomeBinding
 import com.example.module.home.databinding.FgHomeBinding
 import com.example.module.home.util.TabTransformer
 import com.google.android.material.tabs.TabLayoutMediator
@@ -17,15 +18,16 @@ import com.google.android.material.tabs.TabLayoutMediator
  */
 
 class HomeFragment : Fragment() {
-    private val mBinding: FgHomeBinding by lazy {
-        FgHomeBinding.inflate(layoutInflater)
-    }
+    private var _binding: FgHomeBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return mBinding.root
+        _binding= FgHomeBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,19 +36,24 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        mBinding.vp2HomeContent.isSaveEnabled = false
+        binding.vp2HomeContent.isSaveEnabled = false
         val fragments = ArrayList<Fragment>()
         fragments.add(DailyFragment())
         fragments.add(RecommendFragment())
-        mBinding.vp2HomeContent.adapter = HomeAdapter(fragments, childFragmentManager, lifecycle)
-        mBinding.vp2HomeContent.setPageTransformer(TabTransformer())
-        TabLayoutMediator(mBinding.tabHome, mBinding.vp2HomeContent) { tab, position ->
+        binding.vp2HomeContent.adapter = HomeAdapter(fragments, childFragmentManager, lifecycle)
+        binding.vp2HomeContent.setPageTransformer(TabTransformer())
+        TabLayoutMediator(binding.tabHome, binding.vp2HomeContent) { tab, position ->
             tab.text = when (position) {
                 0 -> "日报"
                 1 -> "推荐"
                 else -> error("迷路了QAQ")
             }
         }.attach()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 

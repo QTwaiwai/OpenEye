@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.module_video.R
-import com.example.module_video.ui.PhotoGraphActivity
 
 /**
  * author : QTwawa
@@ -35,6 +34,14 @@ class PhotoAdapter(list: List<String>): RecyclerView.Adapter<PhotoAdapter.PhotoV
     override fun getItemCount(): Int {
       return photoData.size
     }
+    fun interface OnClickedListener {
+        fun onClicked(view: View)
+    }
+
+    private var listener: OnClickedListener? = null
+    fun setOnClickedListener(listener: OnClickedListener) {
+        this.listener = listener
+    }
 
     inner class PhotoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.iv_picture)
@@ -45,6 +52,9 @@ class PhotoAdapter(list: List<String>): RecyclerView.Adapter<PhotoAdapter.PhotoV
             Log.d("4399", "bind: $data")
             Glide.with(itemView.context).load(data).apply(RequestOptions().fitCenter()).into(imageView)
             page.text= (absoluteAdapterPosition+1).toString() + "/" + photoData.size.toString()
+            imageView.setOnClickListener {
+                listener?.onClicked(imageView)
+            }
         }
     }
 }

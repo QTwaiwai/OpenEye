@@ -1,29 +1,19 @@
 package com.example.module.home.adapter
 
 import android.annotation.SuppressLint
-import android.app.ActivityOptions
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.example.module.home.R
 import com.example.module.home.bean.DrData
-import com.example.module.home.bean.DrItem
-import com.example.module.home.bean.DvData
 import com.example.module.home.bean.DvItem
-import com.example.module.home.bean.Rec
-import com.example.module_video.ui.VideoActivity
 
 
 /**
@@ -31,7 +21,7 @@ import com.example.module_video.ui.VideoActivity
  * author : QTwawa
  * date : 2024/7/17 16:08
  */
-class DailyRvAdapter(private val context: Fragment) :
+class DailyRvAdapter :
     PagingDataAdapter<DrData, RecyclerView.ViewHolder>(object :
         DiffUtil.ItemCallback<DrData>() {
         override fun areItemsTheSame(oldItem: DrData, newItem: DrData): Boolean {
