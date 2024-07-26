@@ -53,6 +53,8 @@ dependencies {
     implementation(project(":module_video"))
     implementation(project(":module_found"))
     implementation(project(":module_community"))
+    implementation(project(":module_hot"))
+
     //paging3
     implementation ("androidx.paging:paging-runtime:3.2.1")
     implementation ("androidx.paging:paging-common:3.2.1")

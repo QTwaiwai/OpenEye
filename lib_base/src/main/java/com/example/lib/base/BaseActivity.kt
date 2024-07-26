@@ -22,5 +22,4 @@ abstract class BaseActivity<vb : ViewBinding> : AppCompatActivity() {
         setContentView(mBinding.root)
         afterCreate()
     }
-
 }

@@ -9,4 +9,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorSelected">#03A9F4</color>
     <color name="colorUnselected">#BDBDBD</color>
+
+    <color name="pink">#FFD2D6</color>
+    <color name="pink_purple">#E8BFE4</color>
+    <color name="blue_moon">#C8E0F2</color>
+    <color name="green">#B0D468</color>
+    <color name="green_dan">#B1C69F</color>
+    <color name="blue_purple">#E1DBE9</color>
+    <color name="blue">#9CBCE3</color>
+    <color name="lemon_yellow">#FADE3D</color>
 </resources>

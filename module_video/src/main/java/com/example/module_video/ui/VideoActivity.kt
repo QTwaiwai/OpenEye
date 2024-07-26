@@ -51,7 +51,7 @@ class VideoActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
         mBinding.apply {
-            tvTitle.text=intent.getStringExtra("title")
+            itemTvTitle.text=intent.getStringExtra("title")
             tvAuthor.text=intent.getStringExtra("author")
             tvDescription.text=intent.getStringExtra("description")
             tvLikes.text=intent.getIntExtra("likes",0).toString()
@@ -135,7 +135,7 @@ class VideoActivity : AppCompatActivity() {
 
     private fun playVideo(url: String) {
         val controller = StandardVideoController(this)
-        controller.addDefaultControlComponent(mBinding.tvTitle.text.toString(), false)
+        controller.addDefaultControlComponent(mBinding.itemTvTitle.text.toString(), false)
         mBinding.video.setVideoController(controller) //设置控制器
         mBinding.video.setUrl(url) //设置视频地址
         mBinding.video.start() //开始播放，不调用则不自动播放

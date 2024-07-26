@@ -11,8 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /**
@@ -32,18 +31,19 @@ class SpecialViewModel : ViewModel() {
     fun getSpecialAllData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val responseId = FoundNet.specialService.getSpecial().itemList.map {
+                val response=FoundNet.specialService.getSpecial()
+                val responseId = response.itemList.map {
                     it.data.id.toString()
                 }
                 Log.d("responseId", "getSpecialData: $responseId")
 
-                val response = mutableListOf<SpecialDetailBean>()
+                val responseList = mutableListOf<SpecialDetailBean>()
                 for (id in responseId) {
                     val responseItem = FoundNet.specialService.getSpecialDetail(id)
 
-                    response.add(responseItem)
+                    responseList.add(responseItem)
                 }
-                _mutableSpecialAllStateFlow.emit(response)
+                _mutableSpecialAllStateFlow.emit(responseList)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

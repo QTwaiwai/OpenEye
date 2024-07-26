@@ -1,16 +1,20 @@
 package com.example.module.found.adapter
 
+import android.app.Activity
+import android.app.ActivityOptions
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.lib.base.timeConversion
 import com.example.module.found.bean.ClassifyDetail
 import com.example.module.found.databinding.ItemClassifyDetailBinding
-import com.example.module.found.ui.SpecialDetailActivity
+import com.example.module_video.ui.VideoActivity
 
 /**
  * author : zeq
@@ -38,7 +42,44 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
         }
 
         private fun initListener() {
+            itemView.setOnClickListener {
+                val data = classifyDetail.itemList[bindingAdapterPosition]
 
+                val intent: Intent = Intent(itemView.context, VideoActivity::class.java).apply {
+                    putExtra("title", data.data.content.data.title)
+                    putExtra("author", data.data.content.data.author.name)
+                    putExtra("description", data.data.content.data.description)
+                    putExtra("likes", data.data.content.data.consumption.collectionCount)
+                    putExtra("tag", data.data.content.data.category)
+                    putExtra("share", data.data.content.data.consumption.shareCount)
+                    putExtra("star", data.data.content.data.consumption.realCollectionCount)
+                    putExtra("url", data.data.content.data.playUrl.replace("http", "https"))
+                    putExtra("id", data.data.content.data.id)
+                }
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    itemView.context as Activity,
+                    imgVideo,
+                    imgVideo.transitionName
+                )
+
+                itemView.context.startActivity(intent, options.toBundle())
+            }
+
+            imgShare.setOnClickListener {
+                val data = classifyDetail.itemList[bindingAdapterPosition]
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/plain"
+                intent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "我在开眼发现一个很棒的视频，快来看看吧！\n${
+                        data.data.content.data.playUrl.replace(
+                            "http",
+                            "https"
+                        )
+                    }"
+                )
+                itemView.context.startActivity(Intent.createChooser(intent, "分享到"))
+            }
         }
     }
 
@@ -78,7 +119,6 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
             classifyDetail.itemList[position].data.content.data.cover.detail
                 .replace("http://", "https://")
         Glide.with(holder.itemView.context).load(imgVideoUrl).into(holder.imgVideo)
-
     }
 
     override fun getItemCount(): Int = classifyDetail.itemList.size

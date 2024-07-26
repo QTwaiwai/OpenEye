@@ -18,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="#我的 2021 旅行记"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="18dp" />
 
 
 </androidx.cardview.widget.CardView>

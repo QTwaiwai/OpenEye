@@ -1,16 +1,17 @@
-package com.example.module.home.ui.activity
+package com.example.module.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.module.home.databinding.ActivityHomeBinding
 import com.example.module.home.ui.fragment.HomeFragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
+import com.example.model_hot.ui.HotFragment
 import com.example.module.community.CommunityFragment
 import com.example.module.found.ui.fragment.FoundFragment
-import com.example.module.home.R
 
 /**
  * @author: QT
@@ -38,6 +39,7 @@ class HomeActivity : AppCompatActivity() {
         val communityFragment = CommunityFragment()
         val foundFragment = FoundFragment()
         val homeFragment = HomeFragment()
+        val hotFragment = HotFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fg_home_view, homeFragment)
             .commit()
@@ -48,14 +50,22 @@ class HomeActivity : AppCompatActivity() {
                         .replace(R.id.fg_home_view, homeFragment)
                         .commit()
                 }
-                R.id.item_found ->{
+
+                R.id.item_found -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fg_home_view, foundFragment)
                         .commit()
                 }
-                R.id.item_community ->{
+
+                R.id.item_community -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fg_home_view, communityFragment)
+                        .commit()
+                }
+
+                R.id.item_mine -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fg_home_view, hotFragment)
                         .commit()
                 }
             }
