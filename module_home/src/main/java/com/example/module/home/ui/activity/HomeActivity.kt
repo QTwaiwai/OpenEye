@@ -6,7 +6,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.module.home.databinding.ActivityHomeBinding
-import com.example.module.home.ui.HomeFragment
+import com.example.module.home.ui.fragment.HomeFragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.example.model_hot.ui.HotFragment

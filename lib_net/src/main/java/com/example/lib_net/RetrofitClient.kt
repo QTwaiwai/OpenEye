@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * date : 2024/7/16 15:13
  */
 object RetrofitClient {
-     val retrofit: Retrofit.Builder = Retrofit.Builder()
+     private val retrofit: Retrofit.Builder = Retrofit.Builder()
         .baseUrl("https://baobab.kaiyanapp.com")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())

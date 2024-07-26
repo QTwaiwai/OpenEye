@@ -4,12 +4,12 @@ package com.example.module_video.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
+import androidx.viewpager2.widget.ViewPager2;
 import com.example.module_video.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -20,11 +20,11 @@ public final class ActivityPhotoGraphBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final ImageView ivPhoto;
+  public final ViewPager2 vp2Photo;
 
-  private ActivityPhotoGraphBinding(@NonNull LinearLayout rootView, @NonNull ImageView ivPhoto) {
+  private ActivityPhotoGraphBinding(@NonNull LinearLayout rootView, @NonNull ViewPager2 vp2Photo) {
     this.rootView = rootView;
-    this.ivPhoto = ivPhoto;
+    this.vp2Photo = vp2Photo;
   }
 
   @Override
@@ -54,13 +54,13 @@ public final class ActivityPhotoGraphBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.iv_photo;
-      ImageView ivPhoto = ViewBindings.findChildViewById(rootView, id);
-      if (ivPhoto == null) {
+      id = R.id.vp2_photo;
+      ViewPager2 vp2Photo = ViewBindings.findChildViewById(rootView, id);
+      if (vp2Photo == null) {
         break missingId;
       }
 
-      return new ActivityPhotoGraphBinding((LinearLayout) rootView, ivPhoto);
+      return new ActivityPhotoGraphBinding((LinearLayout) rootView, vp2Photo);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

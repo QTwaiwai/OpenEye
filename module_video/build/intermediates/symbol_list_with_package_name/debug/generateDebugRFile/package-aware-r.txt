@@ -34,7 +34,7 @@ id item_iv_cover
 id item_tv_time
 id item_tv_title
 id iv_likes
-id iv_photo
+id iv_picture
 id iv_share
 id iv_star
 id main
@@ -43,14 +43,17 @@ id toolbar
 id tv_author
 id tv_description
 id tv_likes
+id tv_page
 id tv_related
 id tv_star
 id tv_tag
 id video
 id view
+id vp2_photo
 layout activity_photo_graph
 layout activity_video
 layout item_others
+layout item_photo
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name

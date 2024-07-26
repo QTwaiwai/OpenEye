@@ -33,7 +33,7 @@ int id item_iv_cover 0x0
 int id item_tv_time 0x0
 int id item_tv_title 0x0
 int id iv_likes 0x0
-int id iv_photo 0x0
+int id iv_picture 0x0
 int id iv_share 0x0
 int id iv_star 0x0
 int id main 0x0
@@ -42,14 +42,17 @@ int id toolbar 0x0
 int id tv_author 0x0
 int id tv_description 0x0
 int id tv_likes 0x0
+int id tv_page 0x0
 int id tv_related 0x0
 int id tv_star 0x0
 int id tv_tag 0x0
 int id video 0x0
 int id view 0x0
+int id vp2_photo 0x0
 int layout activity_photo_graph 0x0
 int layout activity_video 0x0
 int layout item_others 0x0
+int layout item_photo 0x0
 int mipmap ic_launcher 0x0
 int mipmap ic_launcher_round 0x0
 int string app_name 0x0

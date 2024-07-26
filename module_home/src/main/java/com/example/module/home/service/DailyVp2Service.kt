@@ -10,6 +10,6 @@ import retrofit2.http.GET
  * date : 2024/7/18 10:05
  */
 interface DailyVp2Service {
-    @GET("api/v4/rankList/videos?strategy=weekly")
+    @GET("api/v4/rankList/videos?strategy=monthly")
      fun getDailyVp2Data(): Observable<DailyVp2Data>
 }

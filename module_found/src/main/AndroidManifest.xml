@@ -13,12 +13,7 @@
         <activity
             android:name=".ui.activity.ClassifyDetailActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
-        </activity>
     </application>
 
 </manifest>

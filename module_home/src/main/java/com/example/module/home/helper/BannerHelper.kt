@@ -32,21 +32,8 @@ class BannerHelper {
         mViewPager2.setPageTransformer(BannerTransformer())
         //开始轮播
         startRun()
-//        //触摸事件
-//        mViewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//            override fun onPageSelected(position: Int) {
-//                isDown=true
-//            }
-//
-//            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-//                // 页面正在滑动时触发
-//             override fun onPageScrollStateChanged(state: Int) {
-//           }
-//
-//               isDown=false
-//                startRun()
-//            }
-//        })
+        //触摸事件
+
     }
 
     private fun startRun() {
@@ -59,7 +46,7 @@ class BannerHelper {
                 val currentItem = mViewPager2.currentItem
                 val nextItem =  if (currentItem == mData.size - 1) 100 else currentItem + 1
                 mViewPager2.setCurrentItem(nextItem, true)
-                handler.postDelayed(this, 3000)
+                handler.postDelayed(this, 5000)
             }
         }
         handler.post(runnable)
