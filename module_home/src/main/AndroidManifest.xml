@@ -6,7 +6,7 @@
     <application tools:ignore="ExtraText">
 
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.activity.HomeActivity"
             android:exported="true">
         </activity>
 

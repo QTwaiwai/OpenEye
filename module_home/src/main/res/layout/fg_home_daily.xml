@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+
+
     <com.example.module.home.MyRecyclerView
         android:id="@+id/rv_home_daily"
         android:layout_width="match_parent"
