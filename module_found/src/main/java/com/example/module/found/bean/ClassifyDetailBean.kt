@@ -9,7 +9,7 @@ data class ClassifyDetail(
     val adExist: Boolean,
     val count: Int,
     val itemList: List<Item>,
-    val nextPageUrl: String,
+    val nextPageUrl: String?,
     val total: Int
 )
 

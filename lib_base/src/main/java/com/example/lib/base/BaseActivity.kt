@@ -13,13 +13,11 @@ abstract class BaseActivity<vb : ViewBinding> : AppCompatActivity() {
         getViewBinding()
     }
 
-    protected abstract fun afterCreate()
     protected abstract fun getViewBinding(): vb
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(mBinding.root)
-        afterCreate()
     }
 }

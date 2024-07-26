@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.module.home.databinding.ActivityHomeBinding
 import com.example.module.home.ui.fragment.HomeFragment
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -63,7 +62,7 @@ class HomeActivity : AppCompatActivity() {
                         .commit()
                 }
 
-                R.id.item_mine -> {
+                R.id.item_hot -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fg_home_view, hotFragment)
                         .commit()

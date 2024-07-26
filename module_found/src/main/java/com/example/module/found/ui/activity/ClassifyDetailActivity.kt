@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
@@ -21,8 +22,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
-    private lateinit var classifyDetailList: ClassifyDetail
+    //private lateinit var classifyDetailList: ClassifyDetail
     private lateinit var mViewModel: ClassifyViewModel
+
+    private val mAdapter: ClassifyDetailAdapter by lazy { ClassifyDetailAdapter() }
+
 
     companion object {
         fun startDetail(
@@ -48,7 +52,31 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
         }
     }
 
-    override fun afterCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // 初始化 ViewModel
+        mViewModel = ViewModelProvider(this)[ClassifyViewModel::class.java]
+        val id: String = intent.getStringExtra("id").toString()
+
+        initRv()
+        initView()
+
+        lifecycleScope.launch {
+            mViewModel.getClassifyDetailData(id).collectLatest {
+                mAdapter.submitData(it)
+            }
+        }
+
+    }
+
+    private fun initRv() {
+        mBinding.rvClassifyDetail.apply {
+            layoutManager = LinearLayoutManager(this@ClassifyDetailActivity)
+            adapter = mAdapter
+        }
+    }
+
+    private fun initView() {
         //设置toolbar的标题，和对应栏目的描述
         setSupportActionBar(mBinding.toolbarDetail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -59,32 +87,9 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
             .load(MyImage.imageArray[intent.getIntExtra("position", 0)])
             .into(mBinding.imgDetail)
 
-        // 初始化 ViewModel
-        mViewModel = ViewModelProvider(this)[ClassifyViewModel::class.java]
-        val id: String = intent.getStringExtra("id").toString()
-        lifecycleScope.launch {
-            // 获取数据
-            mViewModel.getClassifyDetailData(id)
-            // 观察数据变化
-            mViewModel.detailStateFlow.collectLatest {
-                it?.let {
-                    classifyDetailList = it
-                    Log.d("classifyDetail", "onViewCreated: $it")
-                    initRv()
-                }
-            }
-        }
-
         //返回顶部
         mBinding.btnFloat.setOnClickListener {
             mBinding.rvClassifyDetail.smoothScrollToPosition(0)
-        }
-    }
-
-    private fun initRv() {
-        mBinding.rvClassifyDetail.apply {
-            layoutManager = LinearLayoutManager(this@ClassifyDetailActivity)
-            adapter = ClassifyDetailAdapter(classifyDetailList)
         }
     }
 

@@ -3,7 +3,7 @@ package com.example.module.community
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
-import android.util.Log
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -11,16 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lib.base.BaseActivity
 import com.example.module.community.adapter.ChildTabAdapter
-import com.example.module.community.bean.ChildTabBean
 import com.example.module.community.databinding.ActivityChildTabBinding
-import com.example.module.community.viewmodel.ChildTabViewModel
 import com.example.module.community.viewmodel.TabViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
     private lateinit var vmTab: TabViewModel
-    private var url: String? = null
     private val childAdapter: ChildTabAdapter by lazy { ChildTabAdapter() }
     private val mLayoutManager: LinearLayoutManager by lazy { LinearLayoutManager(this@ChildTabActivity) }
 
@@ -34,7 +31,8 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
         }
     }
 
-    override fun afterCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         //初始化ViewModel
         vmTab = ViewModelProvider(this)[TabViewModel::class.java]
         //设置标题
@@ -50,8 +48,6 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
         }
 
         getChildData(id)
-        initListener(id)
-
         //返回顶部
         mBinding.btnCommunityFloat.setOnClickListener {
             mBinding.rvChildTab.smoothScrollToPosition(0)
@@ -62,37 +58,11 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
         //请求ChildTab的数据
         lifecycleScope.launch {
 
-            vmTab.getChildTabData(id)
-
-
-            vmTab.childTabStateFlow.collectLatest {
-                if (it != null) {
-                    childAdapter.submitList(it)
-                }
+            vmTab.getChildTabData(id).collectLatest {
+                childAdapter.submitData(it)
+                mBinding.tvEnd.visibility = View.VISIBLE
             }
         }
-
-        vmTab.url.observe(this@ChildTabActivity) { nextPageUrl ->
-            url = nextPageUrl?.replace("http", "https")
-        }
-
-    }
-
-    private fun initListener(id: String) {
-
-        mBinding.rvChildTab.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0) { // 向下滚动
-                    val visibleItemCount = mLayoutManager.childCount
-                    val totalItemCount = mLayoutManager.itemCount
-                    val pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
-                    if (url != null && (visibleItemCount + pastVisibleItems) >= totalItemCount) {
-                        vmTab.getMoreChildTabData(id, url!!)
-                    }
-                }
-            }
-        })
     }
 
     override fun getViewBinding(): ActivityChildTabBinding =

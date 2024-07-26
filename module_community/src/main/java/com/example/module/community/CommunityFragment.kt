@@ -1,10 +1,12 @@
 package com.example.module.community
 
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.lib.base.BaseFragment
 import com.example.module.community.adapter.TabAdapter
@@ -35,12 +37,14 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
         }
     }
 
-    override fun afterViewCreate() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         // 初始化 ViewModel
         vmTab = ViewModelProvider(requireActivity())[TabViewModel::class.java]
         vmChild = ViewModelProvider(requireActivity())[ChildTabViewModel::class.java]
         //rvManager
-        mbinding.rvCommunityTab.layoutManager = LinearLayoutManager(activity)
+        mbinding?.rvCommunityTab?.layoutManager = LinearLayoutManager(activity)
 
         getChildBean()
     }
@@ -49,11 +53,15 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
         lifecycleScope.launch {
             vmTab.getTabData()
 
-            vmTab.tabStateFlow.collect {
-                if (it != null) {
-                    Log.d("Zeq666", "getTabData: $it")
-                    mbinding.rvCommunityTab.adapter = TabAdapter(it, childTab)
-                    mbinding.tvCommunityEnd.visibility = View.VISIBLE
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                vmTab.tabStateFlow.collect {
+                    if (it != null) {
+                        Log.d("Zeq666", "getTabData: $it")
+                        mbinding?.rvCommunityTab?.apply {
+                            adapter = TabAdapter(it, childTab)
+                            mbinding!!.tvCommunityEnd.visibility = View.VISIBLE
+                        }
+                    }
                 }
             }
         }

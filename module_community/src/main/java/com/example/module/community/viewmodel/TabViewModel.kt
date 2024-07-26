@@ -5,14 +5,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.example.module.community.bean.ChildTabBean
 import com.example.module.community.bean.Item
 import com.example.module.community.bean.TabListBean
 import com.example.module.community.net.CommunityNet
+import com.example.module.community.paging.ChildTabSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -39,53 +47,8 @@ class TabViewModel : ViewModel() {
         }
     }
 
-    private var _mutableChildTabStateFlow = MutableStateFlow<List<Item>?>(null)
-    val childTabStateFlow: StateFlow<List<Item>?>
-        get() = _mutableChildTabStateFlow.asStateFlow()
+    fun getChildTabData(id: String) = Pager(PagingConfig(pageSize = 20, 10)) {
+        ChildTabSource(id)
+    }.flow.cachedIn(viewModelScope)
 
-    private val _url = MutableLiveData<String?>(null)
-    val url: LiveData<String?>
-        get() = _url
-
-    fun getChildTabData(id: String) {
-        viewModelScope.launch{
-            try {
-                val response: ChildTabBean = if (id == "0") {
-                    CommunityNet.childTabService.getChildTab(id, "true", "", "")
-
-                } else {
-                    CommunityNet.childTabService.getChildTab(id, "", "", "")
-                }
-                _url.value = response.nextPageUrl
-                Log.d("zeq", "getChildTabData: ${response.itemList}")
-                _mutableChildTabStateFlow.value = response.itemList
-                //_mutableChildTabStateFlow.emit(response.itemList)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    fun getMoreChildTabData(id: String, nextPageUrl: String) {
-        viewModelScope.launch {
-            try {
-                val parts = nextPageUrl.split("?")
-
-                val queryParameters = parts[1].split("&")
-                val start = queryParameters.firstOrNull { it.startsWith("start=") }
-                    ?.substringAfter("start=").toString()
-                val num = queryParameters.firstOrNull { it.startsWith("num=") }
-                    ?.substringAfter("num=").toString()
-                val response = CommunityNet.childTabService.getChildTab(id, "", start, num)
-                _url.value = response.nextPageUrl
-
-                _mutableChildTabStateFlow.update {
-                    it?.plus(response.itemList)
-                }
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
 }

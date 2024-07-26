@@ -18,4 +18,9 @@ interface ChildTabService {
         @Query("start") start: String,
         @Query("num") num: String
     ): ChildTabBean
+
+    /*@GET
+    suspend fun getMore(
+        @Path("url") url: String
+    ): ChildTabBean*/
 }

@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.lib.base.timeConversion
 import com.example.module.found.bean.ClassifyDetail
+import com.example.module.found.bean.Item
 import com.example.module.found.databinding.ItemClassifyDetailBinding
 import com.example.module_video.ui.VideoActivity
 
@@ -21,8 +24,18 @@ import com.example.module_video.ui.VideoActivity
  * email : 1301731619@qq.com
  * date : 2024/7/17 15:18
  */
-class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
-    RecyclerView.Adapter<ClassifyDetailAdapter.ViewHolder>() {
+class ClassifyDetailAdapter :
+    PagingDataAdapter<Item, ClassifyDetailAdapter.ViewHolder>(object :
+        DiffUtil.ItemCallback<Item>() {
+        override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+            return oldItem == newItem
+        }
+
+    }) {
 
     inner class ViewHolder(binding: ItemClassifyDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -43,7 +56,7 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
 
         private fun initListener() {
             itemView.setOnClickListener {
-                val data = classifyDetail.itemList[bindingAdapterPosition]
+                val data = getItem(bindingAdapterPosition)!!
 
                 val intent: Intent = Intent(itemView.context, VideoActivity::class.java).apply {
                     putExtra("title", data.data.content.data.title)
@@ -66,13 +79,13 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
             }
 
             imgShare.setOnClickListener {
-                val data = classifyDetail.itemList[bindingAdapterPosition]
+                val data = getItem(bindingAdapterPosition)
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
                 intent.putExtra(
                     Intent.EXTRA_TEXT,
                     "我在开眼发现一个很棒的视频，快来看看吧！\n${
-                        data.data.content.data.playUrl.replace(
+                        data!!.data.content.data.playUrl.replace(
                             "http",
                             "https"
                         )
@@ -94,32 +107,31 @@ class ClassifyDetailAdapter(private val classifyDetail: ClassifyDetail) :
     }
 
     override fun onBindViewHolder(holder: ClassifyDetailAdapter.ViewHolder, position: Int) {
-        holder.tvAuthorName.text = classifyDetail.itemList[position].data.header.title
+        getItem(position)!!.run {
+            holder.tvAuthorName.text = data.header.title
 
-        holder.tvVideoDesc.text = classifyDetail.itemList[position].data.content.data.description
-        holder.tvVideoTime.text =
-            classifyDetail.itemList[position].data.content.data.duration.timeConversion()
-        holder.tvClassify.text =
-            buildString {
-                append("#")
-                append(classifyDetail.itemList[position].data.content.data.category)
-            }
-        holder.tvAgree.text =
-            classifyDetail.itemList[position].data.content.data.consumption.playCount.toString()
+            holder.tvVideoDesc.text = data.content.data.description
+            holder.tvVideoTime.text =
+                data.content.data.duration.timeConversion()
+            holder.tvClassify.text =
+                buildString {
+                    append("#")
+                    append(data.content.data.category)
+                }
+            holder.tvAgree.text = data.content.data.consumption.playCount.toString()
 
-        val imgAuthorIconUrl: String =
-            classifyDetail.itemList[position].data.header.icon
-                .replace("http://", "https://")
-        Glide.with(holder.itemView.context)
-            .load(imgAuthorIconUrl)
-            .apply(RequestOptions.circleCropTransform())
-            .into(holder.imgAuthorIcon)
+            val imgAuthorIconUrl: String = data.header.icon
+                    .replace("http://", "https://")
+            Glide.with(holder.itemView.context)
+                .load(imgAuthorIconUrl)
+                .apply(RequestOptions.circleCropTransform())
+                .into(holder.imgAuthorIcon)
 
-        val imgVideoUrl: String =
-            classifyDetail.itemList[position].data.content.data.cover.detail
-                .replace("http://", "https://")
-        Glide.with(holder.itemView.context).load(imgVideoUrl).into(holder.imgVideo)
+            val imgVideoUrl: String = data.content.data.cover.detail
+                    .replace("http://", "https://")
+            Glide.with(holder.itemView.context).load(imgVideoUrl).into(holder.imgVideo)
+        }
+
+
     }
-
-    override fun getItemCount(): Int = classifyDetail.itemList.size
 }
