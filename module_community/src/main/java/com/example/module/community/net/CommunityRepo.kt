@@ -9,7 +9,7 @@ import com.example.module.community.net.apiservice.TabService
  * email : 1301731619@qq.com
  * date : 2024/7/20 11:34
  */
-object CommunityNet {
+object CommunityRepo {
     val tabService: TabService = RetrofitClient.getService(TabService::class.java)
 
     val childTabService: ChildTabService = RetrofitClient.getService(ChildTabService::class.java)

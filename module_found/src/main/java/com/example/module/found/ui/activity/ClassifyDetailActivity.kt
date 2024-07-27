@@ -7,13 +7,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.lib.base.BaseActivity
 import com.example.module.found.MyImage
+import com.example.module.found.R
 import com.example.module.found.adapter.ClassifyDetailAdapter
 import com.example.module.found.bean.ClassifyDetail
 import com.example.module.found.databinding.ActivityClassifyDetailBinding
@@ -22,7 +26,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
-    //private lateinit var classifyDetailList: ClassifyDetail
     private lateinit var mViewModel: ClassifyViewModel
 
     private val mAdapter: ClassifyDetailAdapter by lazy { ClassifyDetailAdapter() }
@@ -60,10 +63,13 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
 
         initRv()
         initView()
+        getData(id)
 
-        lifecycleScope.launch {
-            mViewModel.getClassifyDetailData(id).collectLatest {
-                mAdapter.submitData(it)
+        mBinding.swipeRefreshDetail.apply {
+            setColorSchemeResources(R.color.blue)
+            setOnRefreshListener {
+                getData(id)
+                isRefreshing = false
             }
         }
 
@@ -90,6 +96,16 @@ class ClassifyDetailActivity : BaseActivity<ActivityClassifyDetailBinding>() {
         //返回顶部
         mBinding.btnFloat.setOnClickListener {
             mBinding.rvClassifyDetail.smoothScrollToPosition(0)
+        }
+    }
+
+    private fun getData(id: String) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mViewModel.getClassifyDetailData(id).collectLatest {
+                    mAdapter.submitData(it)
+                }
+            }
         }
     }
 

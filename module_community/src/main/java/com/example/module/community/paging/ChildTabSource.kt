@@ -3,7 +3,7 @@ package com.example.module.community.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.module.community.bean.Item
-import com.example.module.community.net.CommunityNet
+import com.example.module.community.net.CommunityRepo
 
 /**
  * author : zeq
@@ -24,9 +24,9 @@ class ChildTabSource(private val id: String) : PagingSource<Int, Item>() {
             //仓库层请求数据
             val childTabData = if (nextPageUrl == "") {
                 if (id == "0") {
-                    CommunityNet.childTabService.getChildTab(id, "true", "", "")
+                    CommunityRepo.childTabService.getChildTab(id, "true", "", "")
                 } else {
-                    CommunityNet.childTabService.getChildTab(id, "", "", "")
+                    CommunityRepo.childTabService.getChildTab(id, "", "", "")
                 }
             } else {
                 val parts = nextPageUrl.split("?")
@@ -36,7 +36,7 @@ class ChildTabSource(private val id: String) : PagingSource<Int, Item>() {
                     ?.substringAfter("start=").toString()
                 val num = queryParameters.firstOrNull { it.startsWith("num=") }
                     ?.substringAfter("num=").toString()
-                CommunityNet.childTabService.getChildTab(id, "", start, num)
+                CommunityRepo.childTabService.getChildTab(id, "", start, num)
             }
 
             nextPageUrl = childTabData.nextPageUrl ?: ""

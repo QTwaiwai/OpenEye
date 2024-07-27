@@ -7,15 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.module.community.ChildTabActivity
 import com.example.module.community.bean.ChildTabBean
 import com.example.module.community.bean.Item
-import com.example.module.community.databinding.ItemCommunityBinding
 import com.example.module.community.databinding.ItemVptabBinding
-import com.example.module.community.viewmodel.TabViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 /**
  * author : zeq
