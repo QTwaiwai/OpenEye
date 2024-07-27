@@ -41,7 +41,6 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>() {
 
         getChildBean()
         aboutLoad()
-
     }
 
     private fun getChildBean() {

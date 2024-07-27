@@ -1,7 +1,6 @@
 package com.example.module_video.adapter;
 
 /**
- * description : TODO:类的作用
  * author : QTwawa
  * date : 2024/7/18 23:01
  */

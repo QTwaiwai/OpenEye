@@ -52,7 +52,7 @@ dependencies {
     kapt  ("com.alibaba:arouter-compiler:1.5.2")
     implementation(project(":module_community"))
     implementation(project(":module_home"))
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:3.0-alpha-1")
+    /*debugImplementation("com.squareup.leakcanary:leakcanary-android:3.0-alpha-1")*/
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)

@@ -11,9 +11,7 @@ import androidx.paging.cachedIn
 import com.example.lib_net.RetrofitClient
 import com.example.module.home.pagingsource.DailySource
 import com.example.module.home.bean.DailyVp2Data
-import com.example.module.home.bean.DrItem
 import com.example.module.home.bean.DvItem
-import com.example.module.home.service.DailyRvService
 import com.example.module.home.service.DailyVp2Service
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
@@ -26,9 +24,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * date : 2024/7/17 19:03
  */
 class DailyViewModel : ViewModel() {
-    private val _dailyRvData = MutableLiveData<List<DrItem>?>()
-    val dailyRvData: LiveData<List<DrItem>?>
-        get() = _dailyRvData
+
     private val _url = MutableLiveData<String>()
     val url: LiveData<String>
         get() = _url
@@ -38,7 +34,6 @@ class DailyViewModel : ViewModel() {
     private val _isConnect = MutableLiveData<Boolean>()
     val isConnect: LiveData<Boolean>
         get() = _isConnect
-    private val serviceRv = RetrofitClient.getService(DailyRvService::class.java)
     private val serviceVp2 = RetrofitClient.getService(DailyVp2Service::class.java)
 
     init {

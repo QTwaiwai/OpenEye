@@ -32,6 +32,7 @@ class LoadStateViewHolder(
             }
         } else if (loadState is LoadState.Loading) {
             binding.llLoading.visibility = View.VISIBLE
+            binding.tvRetry.visibility = View.GONE
         }
 
     }

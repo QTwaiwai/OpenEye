@@ -9,10 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.lib_net.RetrofitClient
 import com.example.module.home.R
 import com.example.module.home.bean.DvItem
-import com.example.module.home.service.RecommendService
 
 /**
  * description : banner的adapter

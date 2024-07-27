@@ -30,8 +30,8 @@ class MyRecyclerView @JvmOverloads constructor(
                 if (isScrollEnabled) {
                     parent.requestDisallowInterceptTouchEvent(false)
                 }
-                val gapX = x - setX;
-                val gapY = y - setY;
+                val gapX = x - setX
+                val gapY = y - setY
                 if(gapX>gapY){
                     parent.requestDisallowInterceptTouchEvent(false)
                 }

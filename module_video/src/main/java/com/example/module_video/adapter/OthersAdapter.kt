@@ -17,7 +17,6 @@ import com.example.module_video.R
 import com.example.module_video.bean.Item
 
 /**
- * description : TODO:类的作用
  * author : QTwawa
  * date : 2024/7/18 23:01
  */

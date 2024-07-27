@@ -97,31 +97,6 @@ class ChildTabActivity : BaseActivity<ActivityChildTabBinding>() {
     }
 
     private fun aboutLoad() {
-        vmTab.loadStatus.observe(this) {
-            when (it) {
-                NetStatus.LOADING -> {
-                    mBinding.progressBar.visibility = View.VISIBLE
-                }
-
-                NetStatus.SUCCESS -> {
-                    mBinding.progressBar.visibility = View.GONE
-                    Toast.makeText(
-                        this,
-                        "加载成功！",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                else -> {
-                    mBinding.progressBar.visibility = View.GONE
-                    Toast.makeText(
-                        this,
-                        "加载失败",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
 
         mBinding.swipeRefresh.apply {
             setColorSchemeResources(R.color.lemon_yellow)

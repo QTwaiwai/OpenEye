@@ -54,7 +54,6 @@ data class DvData(
     val provider: DvProvider,
     val reallyCollected: Boolean,
     val recallSource: Any,
-    val recall_source: Any,
     val releaseTime: Long,
     val remark: String,
     val resourceType: String,

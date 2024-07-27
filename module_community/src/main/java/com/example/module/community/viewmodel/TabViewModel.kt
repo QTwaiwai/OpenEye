@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * author : zeq
@@ -34,12 +35,16 @@ class TabViewModel : ViewModel() {
 
     fun getTabData() {
         _LoadStatus.value = NetStatus.LOADING
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = CommunityRepo.tabService.getCommunityTab()
                 Log.d("ZeqResponse", "getTabData: $response")
-                _LoadStatus.postValue(NetStatus.SUCCESS)
+
                 _mutableTabStateFlow.emit(response)
+                withContext(Dispatchers.Main) {
+                    _LoadStatus.value = NetStatus.SUCCESS
+                }
             } catch (e: Exception) {
                 _LoadStatus.value = NetStatus.FAIL
                 e.printStackTrace()
