@@ -4,11 +4,12 @@ package com.example.module_video.ui;
  * author : QTwawa
  * date : 2024/7/21 14:20
  */
-@kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000$\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0010\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u0007\u0018\u0000 \u000e2\u00020\u0001:\u0001\u000eB\u0005\u00a2\u0006\u0002\u0010\u0002J\b\u0010\t\u001a\u00020\nH\u0002J\u0012\u0010\u000b\u001a\u00020\n2\b\u0010\f\u001a\u0004\u0018\u00010\rH\u0014R\u001b\u0010\u0003\u001a\u00020\u00048BX\u0082\u0084\u0002\u00a2\u0006\f\n\u0004\b\u0007\u0010\b\u001a\u0004\b\u0005\u0010\u0006\u00a8\u0006\u000f"}, d2 = {"Lcom/example/module_video/ui/PhotoGraphActivity;", "Landroidx/appcompat/app/AppCompatActivity;", "()V", "mBinding", "Lcom/example/module_video/databinding/ActivityPhotoGraphBinding;", "getMBinding", "()Lcom/example/module_video/databinding/ActivityPhotoGraphBinding;", "mBinding$delegate", "Lkotlin/Lazy;", "initView", "", "onCreate", "savedInstanceState", "Landroid/os/Bundle;", "Companion", "module_video_debug"})
+@kotlin.Metadata(mv = {1, 9, 0}, k = 1, xi = 48, d1 = {"\u0000*\n\u0002\u0018\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0005\n\u0002\u0010\u0002\n\u0002\b\u0002\n\u0002\u0018\u0002\n\u0002\b\u0002\b\u0007\u0018\u0000 \u00102\u00020\u0001:\u0001\u0010B\u0005\u00a2\u0006\u0002\u0010\u0002J\b\u0010\u000b\u001a\u00020\fH\u0002J\u0012\u0010\r\u001a\u00020\f2\b\u0010\u000e\u001a\u0004\u0018\u00010\u000fH\u0014R\u000e\u0010\u0003\u001a\u00020\u0004X\u0082.\u00a2\u0006\u0002\n\u0000R\u001b\u0010\u0005\u001a\u00020\u00068BX\u0082\u0084\u0002\u00a2\u0006\f\n\u0004\b\t\u0010\n\u001a\u0004\b\u0007\u0010\b\u00a8\u0006\u0011"}, d2 = {"Lcom/example/module_video/ui/PhotoGraphActivity;", "Landroidx/appcompat/app/AppCompatActivity;", "()V", "mAdapter", "Lcom/example/module_video/adapter/PhotoAdapter;", "mBinding", "Lcom/example/module_video/databinding/ActivityPhotoGraphBinding;", "getMBinding", "()Lcom/example/module_video/databinding/ActivityPhotoGraphBinding;", "mBinding$delegate", "Lkotlin/Lazy;", "initView", "", "onCreate", "savedInstanceState", "Landroid/os/Bundle;", "Companion", "module_video_debug"})
 @com.alibaba.android.arouter.facade.annotation.Route(path = "/video/PhotoGraphActivity")
 public final class PhotoGraphActivity extends androidx.appcompat.app.AppCompatActivity {
     @org.jetbrains.annotations.NotNull
     private final kotlin.Lazy mBinding$delegate = null;
+    private com.example.module_video.adapter.PhotoAdapter mAdapter;
     @org.jetbrains.annotations.NotNull
     public static final com.example.module_video.ui.PhotoGraphActivity.Companion Companion = null;
     

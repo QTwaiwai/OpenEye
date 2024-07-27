@@ -3,9 +3,7 @@ package com.example.module_video.ui
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -16,11 +14,6 @@ import com.example.module_video.adapter.OthersAdapter
 import com.example.module_video.databinding.ActivityVideoBinding
 import com.example.module_video.viewmodel.OthersViewModel
 import xyz.doikki.videocontroller.StandardVideoController
-import xyz.doikki.videocontroller.component.CompleteView
-import xyz.doikki.videocontroller.component.ErrorView
-import xyz.doikki.videocontroller.component.GestureView
-import xyz.doikki.videocontroller.component.VodControlView
-import xyz.doikki.videoplayer.player.VideoView
 
 
 @Route(path="/video/VideoActivity")
@@ -161,10 +154,6 @@ class VideoActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        finish()
-    }
 
     override fun finish() {
         val record=getSharedPreferences(intent.getIntExtra("id",0).toString(), MODE_PRIVATE).edit()

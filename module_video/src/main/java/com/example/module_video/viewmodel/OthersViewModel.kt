@@ -9,7 +9,6 @@ import com.example.module_video.bean.Item
 import com.example.module_video.bean.OthersData
 import com.example.module_video.service.OthersService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers

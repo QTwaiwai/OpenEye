@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.module.home.adapter.RecommendAdapter
 import com.example.module.home.databinding.FgHomeRecommendBinding
@@ -23,21 +22,21 @@ import kotlinx.coroutines.launch
  * date : 2024/7/16 17:59
  */
 class RecommendFragment : Fragment() {
-    private val mBinding: FgHomeRecommendBinding by lazy {
-        FgHomeRecommendBinding.inflate(layoutInflater)
-    }
+    private var _binding: FgHomeRecommendBinding? = null
+    private val binding get() = _binding!!
     private val mRecommendViewModel: RecommendViewModel by lazy {
         ViewModelProvider(this)[RecommendViewModel::class.java]
     }
     private val mAdapter: RecommendAdapter by lazy {
-        RecommendAdapter(this)
+        RecommendAdapter()
     }
-    private var url: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return mBinding.root
+        _binding = FgHomeRecommendBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +46,7 @@ class RecommendFragment : Fragment() {
     }
 
     private fun initView() {
-        mBinding.rvHomeRecommend.apply {
+        binding.rvHomeRecommend.apply {
             adapter = mAdapter
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
@@ -90,4 +89,9 @@ class RecommendFragment : Fragment() {
 //            }
 //        })
 //    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -27,7 +27,6 @@ int drawable shape_video_back 0x0
 int drawable share 0x0
 int drawable star 0x0
 int drawable stared 0x0
-int id appbar 0x0
 int id card_video 0x0
 int id item_iv_cover 0x0
 int id item_tv_time 0x0

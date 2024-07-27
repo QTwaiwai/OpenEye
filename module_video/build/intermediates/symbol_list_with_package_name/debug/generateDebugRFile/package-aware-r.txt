@@ -28,7 +28,6 @@ drawable shape_video_back
 drawable share
 drawable star
 drawable stared
-id appbar
 id card_video
 id item_iv_cover
 id item_tv_time
