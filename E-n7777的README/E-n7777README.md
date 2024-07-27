@@ -36,7 +36,7 @@ SwipeRefreshLayout下拉刷新
 
 ### module_community
 
-![community 00_00_00-00_00_30](E:\格式工厂\summer\community 00_00_00-00_00_30.gif)
+![community 00_00_00-00_00_30](https://github.com/QTwaiwai/OpenEye/blob/en_dev/E-n7777%E7%9A%84README/community%2000_00_00-00_00_30.gif?raw=true)
 
 整体是一个rv每个item里面有一个vp，重写了一下PageTransformer达到一个可以像阅读器一样的翻页效果，每一个item点进去之后使用paging3 + flow实现下滑加载更多，网络出现问题会出现一个TextView点击重试，LoadStateViewHolder传入一个高阶函数，便于点击重试后，在adapter中做重试逻辑，用了一个悬浮按钮点击回到rv顶部，就是调用一下smoothScrollToPosition传入第一个位置0就ok了
 
@@ -44,11 +44,11 @@ SwipeRefreshLayout下拉刷新
 
 这个模块本来是打算做一个搜索的，但是开眼的搜索接口好像也是不能用(输入关键字之后什么也搜不到...)这个模块包含两个部分，分类和专题
 
-![found_Classify 00_00_00-00_00_30](E:\格式工厂\summer\found_Classify 00_00_00-00_00_30.gif)
+![found_Classify 00_00_00-00_00_30](https://github.com/QTwaiwai/OpenEye/blob/en_dev/E-n7777%E7%9A%84README/found_Classify%2000_00_00-00_00_30.gif?raw=true)
 
 分类就是rv，把layoutManager设成GridLayoutManager写了个渐变的shape当背景，点进去后用了一个协调者布局，折叠上去后将类别设置为Toolbar上的字，由于这个接口里的图片又双叒不能用，就在网上搜罗了一些跟专题比较对应的图片放在状态栏里，同样也是paging3加载更多，点击悬浮按钮回到顶部（这里要吐槽一下开眼的接口...真的...乱七八糟，找了好久，这里分类本来点击传的是id请求来的数据一直不照应，后面才发现应该传tagId
 
-![found_Special 00_00_00-00_00_30](E:\格式工厂\summer\found_Special 00_00_00-00_00_30.gif)
+![found_Special 00_00_00-00_00_30](https://github.com/QTwaiwai/OpenEye/blob/en_dev/E-n7777%E7%9A%84README/found_Special%2000_00_00-00_00_30.gif?raw=true)
 
 专题...接口也是一言难尽，预览的那个接口图片不能用，但是点进去之后的图片是可以看的，用了一个比较呆的方法，先拿到预览的每个item的id，直接再用另一个接口请求来详情的数据，拿到图片放在All的界面上，导致很卡
 
@@ -56,7 +56,7 @@ SwipeRefreshLayout下拉刷新
 
 ### module_Hot
 
-![Hot 00_00_00-00_00_30](E:\格式工厂\summer\Hot 00_00_00-00_00_30.gif)
+![Hot 00_00_00-00_00_30](https://github.com/QTwaiwai/OpenEye/blob/en_dev/E-n7777%E7%9A%84README/Hot%2000_00_00-00_00_30.gif?raw=true)
 
 这个模块网络请求用的是RxJava + LiveData，使用了vp2 + fragment同样也是写了一下PageTransformer用来切换两个页面(别问为什么没有周排行，因为接口图片太多不能看了，甚至官方的APP周排行能看的图片都没几个)，这里的Item做了个分享的功能，点击图标启动分享选择器Intent.createChooser()
 
