@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.Visibility
 import com.example.model_hot.R
 import com.example.model_hot.adapter.HotRankAdapter
 import com.example.model_hot.databinding.FragmentHotAllBinding

@@ -5,6 +5,7 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
@@ -40,7 +41,11 @@ class SpecialDetailActivity : BaseActivity<ActivitySpecialDetailBinding>() {
         }
     }
 
-    override fun afterCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        //setContentView(mBinding.root)
+
         mBinding.tvEnd.setTypeface(null, Typeface.BOLD_ITALIC)
         val id: String = intent.getStringExtra("id").toString()
         val imgVideoUrl: String = intent.getStringExtra("imgUrl").toString()

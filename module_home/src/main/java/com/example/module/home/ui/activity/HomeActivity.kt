@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
                     }.commit()
                 }
 
-                R.id.item_mine -> {
+                R.id.item_hot -> {
                     supportFragmentManager.beginTransaction().apply {
                         hide(foundFragment)
                         hide(communityFragment)

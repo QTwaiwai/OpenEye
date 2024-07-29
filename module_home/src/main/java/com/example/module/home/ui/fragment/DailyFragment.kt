@@ -120,22 +120,12 @@ class DailyFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun onScroll() {
-       // 滑到下面加载更多
-//        mBinding.rvHomeDaily.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                if (!recyclerView.canScrollVertically(1)) {
-//                    mDailyViewModel.getNextDailyRvData(mUrl)
-//                }
-//            }
-//        })
-        //判断是否阻拦横向滑动
         val recyclerViewTouchListener = View.OnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_MOVE||event.action == MotionEvent.ACTION_DOWN) {
                 val childView = binding.rvHomeDaily.findChildViewUnder(event.x, event.y)
                 if (childView != null) {
                     val position = binding.rvHomeDaily.getChildAdapterPosition(childView)
-                    binding.rvHomeDaily.isScrollEnabled = position > 1
+                    binding.rvHomeDaily.isScrollEnabled = position > 2
                 }
             }
             false

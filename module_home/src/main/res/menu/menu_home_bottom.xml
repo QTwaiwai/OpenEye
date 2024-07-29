@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_found"
         android:title="发现" />
     <item
-        android:id="@+id/item_mine"
-        android:icon="@drawable/ic_mine"
-        android:title="我的" />
+        android:id="@+id/item_hot"
+        android:icon="@drawable/ic_fire"
+        android:title="热门" />
 </menu>

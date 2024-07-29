@@ -36,7 +36,7 @@ class TabAdapter(
 
         private fun initListener() {
 
-            tvName.setOnClickListener {
+            itemView.setOnClickListener {
                 val childTab = tabListBean.tabInfo.tabList[bindingAdapterPosition]
                 val id: Int = childTab.id
 

@@ -58,11 +58,18 @@
                 android:textColor="@color/blue"
                 android:textSize="18dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_classify_detail"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_detail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp" />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_classify_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
         </LinearLayout>
     </FrameLayout>
 

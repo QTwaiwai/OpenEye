@@ -26,7 +26,7 @@ class ClassifyAdapter(private val classifyList: List<ClassifyBean>) :
 
                 ClassifyDetailActivity.startDetail(
                     itemView.context,
-                    item.id.toString(),
+                    item.tagId.toString(),
                     item.description,
                     classifyName,
                     absoluteAdapterPosition

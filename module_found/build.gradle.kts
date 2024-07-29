@@ -56,6 +56,11 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    // Paging
+    implementation ("androidx.paging:paging-runtime:3.0.0-beta01")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
     implementation ("com.github.bumptech.glide:glide:4.13.2")
     implementation(project(":module_video"))
     annotationProcessor ("com.github.bumptech.glide:compiler:4.13.2")

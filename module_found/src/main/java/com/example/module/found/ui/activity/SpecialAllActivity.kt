@@ -1,5 +1,6 @@
 package com.example.module.found.ui.activity
 
+import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +23,10 @@ class SpecialAllActivity : BaseActivity<ActivitySpecialAllBinding>() {
         LinearLayoutManager(this@SpecialAllActivity)
     }
 
-    override fun afterCreate() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+       // setContentView(mBinding.root)
 
         mBinding.rvSpecialAll.apply {
             layoutManager = mLayoutManager

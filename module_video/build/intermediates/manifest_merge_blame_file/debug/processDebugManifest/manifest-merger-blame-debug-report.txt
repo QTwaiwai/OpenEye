@@ -5,30 +5,30 @@
 5    <uses-sdk android:minSdkVersion="24" />
 6
 7    <uses-permission android:name="android.permission.INTERNET" />
-7-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:3:5-66
-7-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:3:22-64
+7-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:3:5-66
+7-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:3:22-64
 8    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-8-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:4:5-78
-8-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:4:22-76
+8-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:4:5-78
+8-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:4:22-76
 9
 10    <application>
-10-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:5:5-13:19
+10-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:5:5-13:19
 11        <activity
-11-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:6:9-9:77
+11-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:6:9-9:77
 12            android:name="com.example.module_video.ui.VideoActivity"
-12-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:7:13-45
+12-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:7:13-45
 13            android:configChanges="orientation|screenSize|keyboardHidden"
-13-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:9:13-74
+13-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:9:13-74
 14            android:exported="true" />
-14-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:8:13-36
+14-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:8:13-36
 15        <activity
-15-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:10:9-12:77
+15-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:10:9-12:77
 16            android:name="com.example.module_video.ui.PhotoGraphActivity"
-16-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:10:19-56
+16-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:10:19-56
 17            android:configChanges="orientation|screenSize|keyboardHidden"
-17-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:12:13-74
+17-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:12:13-74
 18            android:exported="true" />
-18-->D:\AndroidStudioProjects\OpenEye\module_video\src\main\AndroidManifest.xml:11:13-36
+18-->D:\ASdevelop\Self project\OpenEye\module_video\src\main\AndroidManifest.xml:11:13-36
 19    </application>
 20
 21</manifest>
